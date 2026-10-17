@@ -10,7 +10,7 @@ The application accepts a licensed sample or local video, runs an actual object 
 
 The important remaining problem is football understanding: reliably recognizing passes, shots and other actions; associating supported player identities; distinguishing replays and referee outcomes; and producing useful, timely play-by-play over a complete match. The verified 16.25-second integration produced **one generic observation**, despite ball candidates in four sampled frames. Working inference and audio transport do not establish compelling commentary.
 
-A newer **experimental roster/jersey identity component** is included in the repository checkpoint. Its tests pass, including real Tesseract on a synthetic positive control. It has no measured accuracy on labelled football footage, no possession inference, and has not been published in the private Site release described below. Treat it as the next iteration requiring integrated review.
+The **experimental roster/jersey identity component** now has integrated app/service verification and published controls. A delayed-read bug that could attach an old lineup to another match was reproduced and fixed. Real inference with an intentionally synthetic roster preserved unknown players and produced actual Piper audio/exports. Hosted browser inference also passed. Real-football identity precision/coverage and possession inference remain unvalidated. Read [the latest roster/publication evidence](../product/roster-integration-verification-2026-10-17.md).
 
 **Subsequent action-model progress:** a pinned real temporal checkpoint now runs in an isolated CPU research adapter with a bounded causal proposal contract. Paced rolling on the short sample produced no proposals and took 35.28 seconds; a separate full-window control also supplied no foreground winner above threshold. It remains outside customer narration/scoring. The Python suite now passes 36 tests plus 23 subtests. Read [the actual action-model evaluation](../research/action-model-first-evaluation-2026-10-17.md) for exact inputs, runtime and boundaries.
 
@@ -40,17 +40,17 @@ Repository: **https://github.com/Aminakzyzz/real-suits**, branch **main**.
 | Item | Exact state |
 |---|---|
 | Root project | `/home/aminakziz/projects/real-suits` |
-| Last verified/published baseline root commit | `fb4d3381695d58a66bf79693cacf26d339fe625b` |
+| Earlier verified baseline root commit | `fb4d3381695d58a66bf79693cacf26d339fe625b` |
 | New handoff iteration | Experimental identity/roster code, causal action proposal contract, isolated real-checkpoint evaluation and this report; use current Git HEAD rather than resetting to the baseline. |
 | Private studio | https://touchline-matchday-desk.socialpony16.chatgpt.site |
 | Site ID | `appgprj_6ad2c952011881918cf3fe71b87fdfab` |
-| Published platform source | `dacbc6c5e2332c5a297825ea86bc15fa8cf4c791` |
-| Published version | `appgprj_6ad2c952011881918cf3fe71b87fdfab~appgver_a021e83e2a4081918c046b28386ae6d9` |
-| Successful deployment | `appgdep_6ad365f643bc8191993ccf8da1cc82ea`, returned timestamp `2026-10-17T12:11:58.185903+00:00` |
+| Published platform source | `2cccbaf1aa167a901c57e429149a459b6ccfdcba` |
+| Published version | `appgprj_6ad2c952011881918cf3fe71b87fdfab~appgver_49271715232881918fe3e9ae4dadf123` |
+| Successful deployment | `appgdep_6ad384c199848191adcb75228b555d10`, returned timestamp `2026-10-17T14:23:16.970361+00:00` |
 | Audience | Owner-private custom access; unchanged. This is not a publicly accessible customer launch. |
 | Publication checkout | `/tmp/touchline-sites-open`; separate platform Git repository containing the web app. |
 
-Native deployment status confirmed publication. Functional browser checks ran against the matching **local production Worker**; the authenticated hosted page itself was not separately browser tested. The Python service is local and was not deployed into the Worker. The newer roster/identity iteration has not been republished.
+Native deployment status confirmed publication. Both the local production Worker and the **actual hosted private studio** passed real browser-model/speech-dispatch/caption checks. Hosted QA used documented origin-scoped Sites service admission; it does not establish ordinary OAuth login or visitor identity. Signed-in local-service workflows were verified separately with loopback-only synthetic trusted identity. The Python service remains local and was not deployed into the Worker. Roster controls are published, with identity still explicitly experimental.
 
 Earlier milestones: `5c237f6` operator-assisted desk; `3d948a4` vision research; `69695f4` studio/service implementation and initial report; `fb4d338` production verification, real neural-audio pipeline and private publication.
 
@@ -151,7 +151,7 @@ OCR is optional local Tesseract. Small original crops remain unknown; enlarging 
 
 The frontend imports only lineup/kit fields from roster JSON or a producer-desk backup. Stored events, scores and facts are stripped to prevent future-outcome leakage. Roster state clears on source/engine changes. The UI labels the feature experimental and offers kit-colour adjustment.
 
-**Evidence boundary:** unit/component tests passed, including actual Tesseract on a synthetic readable jersey. That validates the plumbing, not real-football identity precision. The current strict kit/crop gates may have low coverage; thresholds are heuristics and OCR confidence is not calibrated identity probability. This iteration still needs real-clip evaluation, integrated UI review and production verification before publication.
+**Evidence boundary:** unit/component tests passed, including actual Tesseract on a synthetic readable jersey. That validates the plumbing, not real-football identity precision. The current strict kit/crop gates may have low coverage; thresholds are heuristics and OCR confidence is not calibrated identity probability. UI integration, production checks and private publication now passed. Real-football labelled evaluation remains open; generic person detections may include spectators/officials, so kit/jersey evidence still needs on-pitch eligibility and negative-example evaluation.
 
 ## 7. Research and competitive assessment
 
@@ -227,7 +227,11 @@ In the separate detector comparison, each of RF-DETR, YOLOv9 and YOLO26 produced
 - **26 Python tests and 23 subtests passed**, no skips in the observed run: `26 passed, 23 subtests passed in 22.45s`.
 - **18 TypeScript/domain tests passed**, including two new roster-validation/leakage tests; type checking passed.
 - The six new identity tests cover repeated/independent evidence, conflicts and gaps, team/roster uniqueness, unreadable/ambiguous abstention, actual Tesseract synthetic control, cut/unreadable-frame reset and EN/ES/FR evidence-only introduction.
-- **Not rerun for this new iteration:** full app browser workflows, production Worker smoke, complete real-clip OCR integration and deployment. Do not extend the baseline browser/deployment results to this iteration automatically.
+- **Subsequent integration verification:** all eight Chrome workflows passed, including two roster/service workflows with actual inference/Piper; both also passed against the packaged local production Worker. A delayed-file/source-switch regression was reproduced and fixed. Current production and hosted browser smokes passed, and controls were published privately. These checks establish plumbing/unknown fallback, not real named-player accuracy.
+
+### Latest roster/publication checks
+
+Type checking, 18 domain tests and eight development Chrome workflows passed. Two additional local production executions of the roster workflows used loopback-only synthetic trusted identity. Actual hosted QA used Sites service admission and captured nine real detection boxes, narration dispatch, VTT and no page errors. The local service processed 15 roster-enabled frames, kept unsupported players unnamed and produced actual Piper audio/exports. Setup now waits for client initialization, stale roster reads cannot cross source/engine changes, and kit collisions are rejected before creating sessions. See `docs/product/roster-integration-verification-2026-10-17.md` and its evidence JSON. Ordinary hosted OAuth login, smooth continuous overlays and real-football identity precision are still open.
 
 ### Subsequent actual action-model checks
 
@@ -313,7 +317,7 @@ Playwright expects dev server 5173 and Chrome. The production smoke defaults to 
 
 ## 11. Prioritized continuation plan for Claude
 
-**P0 — finish the newest identity iteration as a reviewable change.** Inspect the diff and this report. Run the roster UI through the actual local service, verify payload stripping, correct source/engine resets, optional-Tesseract behavior, mobile layout and unknown-player fallback. Evaluate actual football crops with labelled identities, including deliberate ambiguity. Repeat production smoke if the frontend changes. Publish only after that review; the current private release remains the verified baseline.
+**P0 — validate actual football identity and player eligibility.** The roster UI/service/plumbing/publication checks are complete; read the latest evidence rather than repeating them without changes. Evaluate readable numbers, competing identities, substitutions, camera cuts and spectators/officials with independent labels. Add on-pitch eligibility before treating generic person boxes as players. Preserve unknown actors and measure precision plus coverage; synthetic positive/unknown controls do not prove football accuracy.
 
 **P1 — implement useful action understanding, the main product bottleneck.** A bounded `actions.py` proposal interface and actual isolated OpenSportsLab research adapter now exist. Read the negative/limited evaluation first. Review preprocessing parity and evaluate permitted broadcast-quality footage with independent labels before choosing adaptation or replacement; the current spectator clips did not establish usable actions. Keep model guesses separate from accepted incidents. If unsuitable, keep it a research baseline and implement/train a permitted alternative. Begin with a small useful taxonomy; measure actual inferred inputs, not supplied tactical/oracle tracks. A useful action can remain anonymous when actor identity is unsupported.
 
@@ -342,10 +346,11 @@ Proposed gates: a contiguous 10–15-minute permitted, paced autonomous demo wit
 
 ## 12. Paste this into Claude Code
 
-> Continue Touchline in `/home/aminakziz/projects/real-suits` on the current branch. Read `CLAUDE.md`, then `docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md`. The verified private deployment has real generic CV and description narration; a separate complete short-clip local neural-audio/export pipeline also passed. The newest roster/jersey identity iteration needs integrated UI/real-football/production verification and is not deployed. Subsequent action-model work adds a bounded causal proposal interface and an isolated executable checkpoint adapter; actual research results remain insufficient for useful commentary. Current Python suite: 36 tests plus 23 subtests; prior TypeScript/domain suite: 18 passed. Preserve the user's original untracked plan, media attribution, reported Premier League hackathon scope and owner-private audience. First finish reviewing this iteration, then implement and evaluate causal football action understanding, evidence-grounded commentary scheduling and full-match reliability. Read the actual OpenSportsLab checkpoint evaluation and reusable research runner before further model work; do not confuse its executed research baseline with a usable or commercially cleared action layer. Use free authorized speech. Do not present generic descriptions, synthetic OCR controls, a manual event log or a successful deployment as completed autonomous football commentary. Keep the full customer-product goal active until its actual acceptance evidence exists. Update the report with exact results and next steps.
+> Continue Touchline in `/home/aminakziz/projects/real-suits` on the current branch. Read `CLAUDE.md`, then `docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md`. The verified private deployment has real generic CV and description narration; a separate complete short-clip local neural-audio/export pipeline also passed. Roster controls are published and integrated UI/service checks passed, including a fixed stale-read/source-switch regression. Actual hosted browser inference/speech dispatch/captions also passed through origin-scoped Sites service admission, which is not an ordinary OAuth test. Real-football identity precision and player eligibility remain open. Subsequent action-model work adds a bounded causal proposal interface and an isolated executable checkpoint adapter; actual research results remain insufficient for useful commentary. Current Python suite: 36 tests plus 23 subtests; frontend checks: type checking, 18 domain tests, eight development Chrome workflows and two production roster workflows passed. Preserve the user's original untracked plan, media attribution, reported Premier League hackathon scope and owner-private audience. Continue with actual football identity/player eligibility, causal action understanding, evidence-grounded commentary scheduling and full-match reliability; preserve the verified release and do not redo completed checks without relevant changes. Read the actual OpenSportsLab checkpoint evaluation and reusable research runner before further model work; do not confuse its executed research baseline with a usable or commercially cleared action layer. Use free authorized speech. Do not present generic descriptions, synthetic OCR controls, a manual event log or a successful deployment as completed autonomous football commentary. Keep the full customer-product goal active until its actual acceptance evidence exists. Update the report with exact results and next steps.
 
 ## 13. Supporting records
 
+- `docs/product/roster-integration-verification-2026-10-17.md` and `roster-validation-evidence-2026-10-17.json`: latest UI regression fixes, real service integration, hosted QA and private publication.
 - `docs/product/vision-verification-2026-10-17.md` and `vision-validation-evidence-2026-10-17.json`: published baseline and actual integration evidence.
 - `docs/research/live-football-vision-2026-10-17.md`: detailed technical research, sources, dataset/model boundaries and proposed architecture.
 - `docs/research/action-model-first-evaluation-2026-10-17.md` and `docs/product/action-model-evidence-2026-10-17.json`: actual checkpoint experiments and next model/data decision.

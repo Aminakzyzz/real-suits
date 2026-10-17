@@ -17,19 +17,37 @@ export type VisionHealth = {
   model?: { ready: boolean; name: string };
   speech?: { ready: boolean; voices: VisionVoice[]; engine?: string };
   version?: string;
-  identity?: { available: boolean; experimental: boolean; requiresRoster: boolean };
+  identity?: {
+    available: boolean;
+    experimental: boolean;
+    requiresRoster: boolean;
+  };
 };
 export type VisionObservation = {
   sequence: number;
   sourcePtsMs: number;
   observedThroughPtsMs: number;
+  identityEnabled?: boolean;
+  identityMs?: number;
   players: {
     trackId: number | string;
     box: number[];
     confidence: number;
     team: "home" | "away" | null;
-    identity?: { playerId: string; name: string; number: number; team: "home" | "away";
-      evidence: { method: string; readings: number; firstPtsMs: number; lastPtsMs: number; teamScore: number; ocrScore: number } };
+    identity?: {
+      playerId: string;
+      name: string;
+      number: number;
+      team: "home" | "away";
+      evidence: {
+        method: string;
+        readings: number;
+        firstPtsMs: number;
+        lastPtsMs: number;
+        teamScore: number;
+        ocrScore: number;
+      };
+    };
   }[];
   ball: { box: number[]; confidence: number } | null;
   scene: "wide" | "closeup" | "cut";

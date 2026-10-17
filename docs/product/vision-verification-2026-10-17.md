@@ -1,4 +1,6 @@
-# Vision studio: production verification and deployment
+# Vision studio: earlier production verification and deployment
+
+**Later release:** see [roster integration, actual hosted QA and current publication](roster-integration-verification-2026-10-17.md). The IDs and pending hosted-check statements below describe the earlier baseline.
 
 Updated 17 October 2026, Europe/Berlin. This records progress **after** the full
 Claude handoff checkpoint. The new studio is now deployed, and the previously

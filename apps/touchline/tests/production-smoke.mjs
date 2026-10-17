@@ -32,7 +32,14 @@ try {
   await page.getByRole("button", { name: "Start match analysis" }).click();
   await page.waitForFunction(() => document.querySelectorAll(".vision-timeline li").length > 0, null, { timeout: 180000 });
   await page.waitForFunction(() => window.__spoken.length > 0, null, { timeout: 30000 });
-  const detected = await page.locator(".vision-detection-overlay rect").count();
+  // Expired observations are intentionally hidden between model results.
+  // Capture an actual visible detection count rather than assuming speech and
+  // overlay refresh happen in the same render or keeping stale boxes on screen.
+  const visibleDetections = await page.waitForFunction(() => {
+    const count = document.querySelectorAll(".vision-detection-overlay rect").length;
+    return count > 0 ? count : false;
+  }, null, { timeout: 15000 });
+  const detected = await visibleDetections.jsonValue();
   assert.ok(detected > 0, "Production must display actual detections.");
   assert.equal(await page.locator(".vision-error").count(), 0);
   await page.screenshot({ path: "test-results/production-vision.png", fullPage: true });

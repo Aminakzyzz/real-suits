@@ -87,6 +87,9 @@ the frontend extracts only roster fields and strips events/scores/facts.
 Names require repeated readable jersey/team evidence and otherwise remain
 unknown. The module has component tests and a real-OCR synthetic positive
 control, not validated football identity accuracy. It does not establish
-possession or action outcomes. New UI integration and real-football evaluation
-remain pending; this iteration is not in the last private deployment. See the
-full handoff for exact behavior and continuation tasks.
+possession or action outcomes. Real app/service integration, unknown-player
+fallback, actual Piper exports and roster UI regression checks passed; the
+controls are published privately. Python inference remains local. Real-football
+accuracy and on-pitch eligibility remain unvalidated; person detections can
+include spectators or officials. See the latest roster verification and full
+handoff for exact evidence and continuation tasks.

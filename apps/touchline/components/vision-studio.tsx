@@ -118,6 +118,8 @@ export default function VisionStudio() {
   const [language, setLanguage] = useState<VisionLanguage>("en");
   const [voice, setVoice] = useState("");
   const [roster, setRoster] = useState<MatchRoster | null>(null);
+  const [rosterLoading, setRosterLoading] = useState(false);
+  const [interactive, setInteractive] = useState(false);
   const [maxSeconds, setMaxSeconds] = useState(60);
   const [boxes, setBoxes] = useState(true);
   const [speak, setSpeak] = useState(true);
@@ -140,6 +142,7 @@ export default function VisionStudio() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const uploadRef = useRef<HTMLInputElement>(null);
   const rosterRef = useRef<HTMLInputElement>(null);
+  const rosterEpochRef = useRef(0);
   const abortRef = useRef<AbortController | null>(null);
   const spokenRef = useRef(new Set<string>());
   const isSpeakingRef = useRef(false);
@@ -150,7 +153,11 @@ export default function VisionStudio() {
   const sessionRef = useRef<VisionSession | null>(null);
   sessionRef.current = session;
 
-  useEffect(() => { setRoster(null); }, [sourceId, mode]);
+  useEffect(() => {
+    rosterEpochRef.current += 1;
+    setRoster(null);
+    setRosterLoading(false);
+  }, [sourceId, mode]);
 
   const releaseStream = useCallback(() => {
     streamRef.current?.getTracks().forEach((track) => track.stop());
@@ -237,6 +244,7 @@ export default function VisionStudio() {
   }, [refreshLeague]);
 
   useEffect(() => {
+    setInteractive(true);
     refreshConnection();
     import("@/lib/browser-vision")
       .then(async (module) => setHealth(await module.browserHealth()))
@@ -441,7 +449,7 @@ export default function VisionStudio() {
   }
 
   async function run() {
-    if (busy || live) return;
+    if (busy || live || rosterLoading) return;
     setBusy(true);
     setSession(null);
     setError(null);
@@ -464,7 +472,13 @@ export default function VisionStudio() {
       ...(mode === "service" && roster ? { roster } : {}),
     };
     try {
-      if (settings.roster) rosterSchema.parse(settings.roster);
+      if (settings.roster) {
+        const checked = rosterSchema.safeParse(settings.roster);
+        if (!checked.success)
+          throw new Error(
+            checked.error.issues[0]?.message || "Check the match roster.",
+          );
+      }
       if (mode === "browser") {
         if (!videoRef.current || !playable)
           throw new Error("Choose a match video first.");
@@ -546,13 +560,37 @@ export default function VisionStudio() {
   }
 
   async function loadRoster(file: File) {
-    if (file.size > 750000) { setError("Choose a roster or producer-desk backup smaller than 750 KB."); return; }
+    if (live || busy) return;
+    if (file.size > 750000) {
+      setError("Choose a roster or producer-desk backup smaller than 750 KB.");
+      return;
+    }
+    const epoch = ++rosterEpochRef.current;
+    setRosterLoading(true);
     try {
-      const parsed = rosterSchema.safeParse(JSON.parse(await file.text()));
-      if (!parsed.success) { setError(parsed.error.issues[0]?.message || "Choose a valid match roster."); return; }
+      const content = await file.text();
+      if (epoch !== rosterEpochRef.current) return;
+      const parsed = rosterSchema.safeParse(JSON.parse(content));
+      if (!parsed.success) {
+        setError(
+          parsed.error.issues[0]?.message || "Choose a valid match roster.",
+        );
+        return;
+      }
       setRoster(parsed.data);
       setError(null);
-    } catch { setError("Choose a valid roster JSON file or producer-desk backup."); }
+    } catch {
+      if (epoch === rosterEpochRef.current)
+        setError("Choose a valid roster JSON file or producer-desk backup.");
+    } finally {
+      if (epoch === rosterEpochRef.current) setRosterLoading(false);
+    }
+  }
+
+  function clearRoster() {
+    rosterEpochRef.current += 1;
+    setRoster(null);
+    setRosterLoading(false);
   }
 
   async function shareMatchWindow() {
@@ -1118,7 +1156,11 @@ export default function VisionStudio() {
               </span>
               <span>01 — SETUP</span>
             </div>
-            <div className="vision-control-body">
+            <fieldset
+              className="vision-control-body"
+              disabled={!interactive}
+              aria-label="Commentary setup controls"
+            >
               <label className="vision-field-label">PROCESSING ENGINE</label>
               <div className="vision-engine-toggle">
                 <button
@@ -1302,24 +1344,91 @@ export default function VisionStudio() {
                   : "Open source speech voices. No impersonation or voice cloning."}
               </p>
 
-              <div className="vision-range-label">
-                {mode === "service" && (
-                  <div className="vision-roster-panel">
-                    <label className="vision-field-label">MATCH ROSTER · EXPERIMENTAL</label>
-                    <input ref={rosterRef} type="file" accept="application/json,.json" hidden aria-label="Match roster file" onChange={event => { const file = event.target.files?.[0]; if (file) void loadRoster(file); event.target.value = ""; }} />
-                    <button className="vision-btn vision-btn-purple" disabled={live || busy || !serviceHealth?.identity?.available} onClick={() => rosterRef.current?.click()}><Upload size={14} /> {roster ? "Replace roster" : "Load match roster"}</button>
-                    <p className="vision-field-hint">Load this match’s lineup or a producer-desk backup. Names require repeated jersey readings and kit evidence.</p>
-                    {roster && <>
-                      {(["home", "away"] as const).map(side => <label className="vision-roster-team" key={side}>
-                        <input type="color" aria-label={`${side === "home" ? "Home" : "Away"} visible kit colour`} value={roster[side].color} disabled={live || busy} onChange={event => { const color = event.target.value; setRoster(current => current ? { ...current, [side]: { ...current[side], color } } : null); }} />
-                        <span>{roster[side].name}<small>{roster[side].players.length} roster entries</small></span>
-                      </label>)}
-                      <button className="vision-tool-active" disabled={live || busy} onClick={() => setRoster(null)}>Clear roster</button>
-                    </>}
-                    {serviceHealth && !serviceHealth.identity?.available && <p className="vision-field-hint">Jersey recognition is unavailable on this engine. Tracking and commentary still work.</p>}
-                  </div>
-                )}
-              </div>
+              {mode === "service" && (
+                <div className="vision-roster-panel">
+                  <p className="vision-field-label">
+                    MATCH ROSTER · EXPERIMENTAL
+                  </p>
+                  <input
+                    ref={rosterRef}
+                    type="file"
+                    accept="application/json,.json"
+                    hidden
+                    aria-label="Match roster file"
+                    disabled={live || busy || rosterLoading}
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+                      if (file) void loadRoster(file);
+                      event.target.value = "";
+                    }}
+                  />
+                  <button
+                    className="vision-btn vision-btn-purple"
+                    disabled={
+                      live ||
+                      busy ||
+                      rosterLoading ||
+                      !serviceHealth?.identity?.available
+                    }
+                    onClick={() => rosterRef.current?.click()}
+                  >
+                    <Upload size={14} />{" "}
+                    {rosterLoading
+                      ? "Reading roster…"
+                      : roster
+                        ? "Replace roster"
+                        : "Load match roster"}
+                  </button>
+                  <p className="vision-field-hint">
+                    Load this match’s lineup or a producer-desk backup. Names
+                    require repeated jersey readings and kit evidence.
+                  </p>
+                  {roster && (
+                    <>
+                      {(["home", "away"] as const).map((side) => (
+                        <label className="vision-roster-team" key={side}>
+                          <input
+                            type="color"
+                            aria-label={`${side === "home" ? "Home" : "Away"} visible kit colour`}
+                            value={roster[side].color}
+                            disabled={live || busy}
+                            onChange={(event) => {
+                              const color = event.target.value;
+                              setRoster((current) =>
+                                current
+                                  ? {
+                                      ...current,
+                                      [side]: { ...current[side], color },
+                                    }
+                                  : null,
+                              );
+                            }}
+                          />
+                          <span>
+                            {roster[side].name}
+                            <small>
+                              {roster[side].players.length} roster entries
+                            </small>
+                          </span>
+                        </label>
+                      ))}
+                      <button
+                        className="vision-tool-active"
+                        disabled={live || busy}
+                        onClick={clearRoster}
+                      >
+                        Clear roster
+                      </button>
+                    </>
+                  )}
+                  {serviceHealth && !serviceHealth.identity?.available && (
+                    <p className="vision-field-hint">
+                      Jersey recognition is unavailable on this engine. Tracking
+                      and commentary still work.
+                    </p>
+                  )}
+                </div>
+              )}
               <div className="vision-range-label">
                 <label className="vision-field-label" htmlFor="vision-duration">
                   ANALYZE UP TO
@@ -1409,6 +1518,7 @@ export default function VisionStudio() {
                   onClick={run}
                   disabled={
                     uploading ||
+                    rosterLoading ||
                     (mode === "service" && (!serviceHealth || !sourceId)) ||
                     (mode === "browser" && !playable)
                   }
@@ -1425,7 +1535,7 @@ export default function VisionStudio() {
                     : "Analyzing as the video plays."
                   : "First run downloads the vision model. Keep this tab open."}
               </p>
-            </div>
+            </fieldset>
             <div className="vision-model-info">
               <span>
                 <span

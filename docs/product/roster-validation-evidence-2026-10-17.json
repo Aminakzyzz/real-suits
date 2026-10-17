@@ -1,0 +1,197 @@
+{
+  "checkedAt": "2026-10-17T14:31:28Z",
+  "scope": "Roster UI/service integration and regression prevention, not football identity accuracy or customer readiness.",
+  "sourceCommit": "2cccbaf1aa167a901c57e429149a459b6ccfdcba",
+  "deployment": {
+    "id": "appgdep_6ad384c199848191adcb75228b555d10",
+    "project_id": "appgprj_6ad2c952011881918cf3fe71b87fdfab",
+    "title": "Touchline \u2014 Matchday commentary studio",
+    "version_id": "appgprj_6ad2c952011881918cf3fe71b87fdfab~appgver_49271715232881918fe3e9ae4dadf123",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://touchline-matchday-desk.socialpony16.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6ad2c952011881918cf3fe71b87fdfab",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-10-17T14:23:16.970361+00:00"
+  },
+  "archiveSha256": "2ca2b0712ef39389c45758d13804b2165f20912ab11cc478d203690fbeda9e73",
+  "sourceFileHashes": {
+    "components/vision-studio.tsx": "895fb4bbf5ac52ba743b6bcfc470a501e31e7c7d9219c5229fb23625624eb330",
+    "app/globals.css": "d010d0de6bb4febaafecb7bbab1fd08d22d3760100dd223e0c641c8999b6a02f",
+    "lib/roster.ts": "b9afad64136e6128919c66258a55861234c8431220c2a3c3f1b9e43b93f424a9",
+    "lib/vision.ts": "7c5d75198fe2f1a5dce7b2e56a8e77b7df6f87f9807c83955205c86defacc66c",
+    "playwright.config.ts": "ae1bcd14329d8f220fea196cd6a367d4cc8ca44fd654d7eae92e29456b617635",
+    "tests/roster.e2e.ts": "6389b6e03d320afdd07b26df08cf8edeb7fb18414a1f6f01dbe45bc72011b979",
+    "tests/production-smoke.mjs": "316724685dbe9fe93a17e3b53882581dbecb48541cdee3b1a5b7ace6e5415317"
+  },
+  "checks": {
+    "typecheck": true,
+    "domainTests": 18,
+    "developmentChromeWorkflows": 8,
+    "productionRosterWorkflows": 2,
+    "productionIdentity": "Synthetic trusted identity headers, explicitly loopback-only; no ordinary hosted OAuth claim.",
+    "serverRenderedSetupDisabled": true,
+    "lateRosterReadRegressionDemonstratedAndFixed": true,
+    "kitCollisionBlockedBeforeSessionCreation": true,
+    "producerBackupFutureFieldsExcluded": true,
+    "engineAndSourceChangeClearRoster": true,
+    "mobile390NoOverflow": true,
+    "productionRosterSourceCommit": "2cccbaf1aa167a901c57e429149a459b6ccfdcba"
+  },
+  "actualProductionProxyIntegration": {
+    "sessionId": "edd9a48b0d364eb483e28559999a6486",
+    "sourceId": "inter-ajax-u19-2012",
+    "sourceSha256": "9ef107eaf7b39c61f6511046a37f13de175b2f782c3ee4224c3118b018902b6c",
+    "durationMs": 15000,
+    "frames": 15,
+    "identityEnabledFrames": 15,
+    "namedPlayerObservations": 0,
+    "events": 1,
+    "namedEvents": 0,
+    "utterances": 1,
+    "voices": [
+      "piper-en"
+    ],
+    "allEvidencePtsCausal": true,
+    "metrics": {
+      "inferenceP50Ms": 228.4,
+      "inferenceP95Ms": 301.0,
+      "realTimeFactor": 0.948,
+      "frames": 15,
+      "events": 1
+    }
+  },
+  "actualProductionBrowserSmoke": {
+    "checkedAt": "2026-10-17T14:22:00.621Z",
+    "baseURL": "http://127.0.0.1:5174",
+    "sourceId": "inter-ajax-u19-2012",
+    "detectedBoxes": 8,
+    "captionBytes": 112,
+    "scope": "Production Worker: real ONNX browser inference, narration dispatch, captions, producer desk and unsigned API boundaries. No football accuracy claim.",
+    "errors": []
+  },
+  "boxTimingDiagnostic": {
+    "rows": [
+      {
+        "time": 1.284449,
+        "boxes": 9,
+        "metrics": "ANALYSIS PROGRESS0%00:00 / 00:16 processedFRAMES ANALYZED1Actual model inferencesMEDIAN INFERENCE1197msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 1.789312,
+        "boxes": 9,
+        "metrics": "ANALYSIS PROGRESS0%00:00 / 00:16 processedFRAMES ANALYZED1Actual model inferencesMEDIAN INFERENCE1197msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 2.291978,
+        "boxes": 0,
+        "metrics": "ANALYSIS PROGRESS0%00:00 / 00:16 processedFRAMES ANALYZED1Actual model inferencesMEDIAN INFERENCE1197msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 2.796185,
+        "boxes": 9,
+        "metrics": "ANALYSIS PROGRESS8%00:01 / 00:16 processedFRAMES ANALYZED2Actual model inferencesMEDIAN INFERENCE1070msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 3.299175,
+        "boxes": 0,
+        "metrics": "ANALYSIS PROGRESS8%00:01 / 00:16 processedFRAMES ANALYZED2Actual model inferencesMEDIAN INFERENCE1070msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 3.802263,
+        "boxes": 10,
+        "metrics": "ANALYSIS PROGRESS15%00:02 / 00:16 processedFRAMES ANALYZED3Actual model inferencesMEDIAN INFERENCE1150msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 4.305476,
+        "boxes": 0,
+        "metrics": "ANALYSIS PROGRESS15%00:02 / 00:16 processedFRAMES ANALYZED3Actual model inferencesMEDIAN INFERENCE1150msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 4.808927,
+        "boxes": 10,
+        "metrics": "ANALYSIS PROGRESS22%00:03 / 00:16 processedFRAMES ANALYZED4Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 5.312194,
+        "boxes": 10,
+        "metrics": "ANALYSIS PROGRESS22%00:03 / 00:16 processedFRAMES ANALYZED4Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 5.815473,
+        "boxes": 0,
+        "metrics": "ANALYSIS PROGRESS22%00:03 / 00:16 processedFRAMES ANALYZED4Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 6.318558,
+        "boxes": 12,
+        "metrics": "ANALYSIS PROGRESS29%00:04 / 00:16 processedFRAMES ANALYZED5Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 6.821193,
+        "boxes": 0,
+        "metrics": "ANALYSIS PROGRESS29%00:04 / 00:16 processedFRAMES ANALYZED5Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 7.323148,
+        "boxes": 11,
+        "metrics": "ANALYSIS PROGRESS36%00:05 / 00:16 processedFRAMES ANALYZED6Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 7.826424,
+        "boxes": 0,
+        "metrics": "ANALYSIS PROGRESS36%00:05 / 00:16 processedFRAMES ANALYZED6Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 8.329581,
+        "boxes": 12,
+        "metrics": "ANALYSIS PROGRESS43%00:07 / 00:16 processedFRAMES ANALYZED7Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 8.833618,
+        "boxes": 0,
+        "metrics": "ANALYSIS PROGRESS43%00:07 / 00:16 processedFRAMES ANALYZED7Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 9.338557,
+        "boxes": 9,
+        "metrics": "ANALYSIS PROGRESS50%00:08 / 00:16 processedFRAMES ANALYZED8Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 9.841285,
+        "boxes": 9,
+        "metrics": "ANALYSIS PROGRESS50%00:08 / 00:16 processedFRAMES ANALYZED8Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 10.344231,
+        "boxes": 0,
+        "metrics": "ANALYSIS PROGRESS50%00:08 / 00:16 processedFRAMES ANALYZED8Actual model inferencesMEDIAN INFERENCE1136msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      },
+      {
+        "time": 10.847523,
+        "boxes": 9,
+        "metrics": "ANALYSIS PROGRESS57%00:09 / 00:16 processedFRAMES ANALYZED9Actual model inferencesMEDIAN INFERENCE1144msP95 1197 msCOMMENTARY LINES1Grounded in visual observations"
+      }
+    ],
+    "errors": []
+  },
+  "hostedQa": {
+    "checkedAt": "2026-10-17T14:26:42.114Z",
+    "url": "https://touchline-matchday-desk.socialpony16.chatgpt.site",
+    "sourceId": "inter-ajax-u19-2012",
+    "detectedBoxes": 9,
+    "captionBytes": 112,
+    "errors": [],
+    "scope": "Actual hosted private studio using origin-scoped Sites QA admission: real ONNX inference, speech dispatch and caption download. Does not verify ordinary OAuth login, audible voice quality, football accuracy or a remotely hosted Python service."
+  },
+  "limitations": [
+    "Synthetic mismatched roster exercises unknown identity fallback, not actual player identification accuracy.",
+    "Generic person detections can include officials or spectators; kit/jersey evidence alone does not prove an on-pitch player.",
+    "Browser overlays expire between results; smooth continuous synchronization is not established.",
+    "Action model remains isolated research; no automatic football-event or scoreboard quality is established.",
+    "Python service was not remotely deployed."
+  ]
+}

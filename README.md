@@ -4,7 +4,7 @@ A football vision and commentary prototype for small clubs and independent produ
 
 The application lives in [`apps/touchline`](apps/touchline). The new studio is at `/`; the existing producer desk at `/desk` turns **operator-confirmed match events** into commentary, a correctable scoreboard, player-fact overlays and exports. An optional [Python service](services/vision/README.md) adds persistent inference sessions and free WAV speech/caption exports.
 
-Current vision narration describes observations with deterministic rules. The latest local-service iteration adds experimental roster/kit/jersey identity evidence; real-football accuracy and integrated UI verification remain pending, and it is newer than the deployed baseline. It does **not** yet provide reliable named-player play-by-play, football actions/goals or scores, an authenticated league feed, cloned voices or broadcast-quality accuracy. The studio is deployed privately at [Touchline](https://touchline-matchday-desk.socialpony16.chatgpt.site). Read the [latest production verification](docs/product/vision-verification-2026-10-17.md) and [full implementation report and Claude handoff](docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md).
+Current vision narration describes observations with deterministic rules. The latest local-service iteration adds experimental roster/kit/jersey identity evidence; real-football accuracy remains pending. Roster import, unknown-player fallback and regression handling passed integrated UI/service checks, and the experimental controls are published privately. It does **not** yet provide reliable named-player play-by-play, football actions/goals or scores, an authenticated league feed, cloned voices or broadcast-quality accuracy. The studio is deployed privately at [Touchline](https://touchline-matchday-desk.socialpony16.chatgpt.site). Read the [latest roster, hosted QA and publication verification](docs/product/roster-integration-verification-2026-10-17.md) and [full implementation report and Claude handoff](docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md).
 
 ## Run locally
 
@@ -41,11 +41,12 @@ npm run typecheck
 npm run test:e2e
 ```
 
-Browser tests require a running dev server at port 5173, Google Chrome, and `ffmpeg` for the synthetic-video case. They cover actual user workflows, persistence, cloud mutations, access boundaries, conflicts, overlay revocation, voice-command dispatch and local-video timing. Audible voice quality and third-party OBS capture still require checks on the operator's own setup.
+Browser tests require a running dev server at port 5173, Google Chrome, and `ffmpeg` for the synthetic-video case. The two optional roster integration workflows also need the Python service, Tesseract English and the Piper voice; follow the linked service setup. Tests skip those workflows explicitly if the service/OCR is unavailable. They cover actual user workflows, persistence, cloud mutations, access boundaries, conflicts, overlay revocation, voice-command dispatch and local-video timing. Audible voice quality and third-party OBS capture still require checks on the operator's own setup.
 
 ## Documentation
 
 - [Latest build report and Claude Code handoff](docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md)
+- [Latest roster integration, hosted QA and publication](docs/product/roster-integration-verification-2026-10-17.md)
 - [Production vision and neural-audio verification](docs/product/vision-verification-2026-10-17.md)
 - [Optional local vision/audio service](services/vision/README.md)
 - [Free speech engines and voice provenance](docs/product/free-speech.md)
