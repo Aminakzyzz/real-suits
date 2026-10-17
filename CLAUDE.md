@@ -12,7 +12,10 @@ be committed or rewritten without instruction.
 The current build runs real generic person/ball detection and conservative visual
 observation narration. It does not yet perform reliable named-player play-by-play
 or automatic rule-event/score recognition. Do not claim those features are done.
-The new studio has not been deployed to the existing hosted URL at this checkpoint.
+Subsequent production verification and private deployment succeeded. Read
+`docs/product/vision-verification-2026-10-17.md` for the latest evidence and
+remaining quality gaps. The current narration remains too generic for the full
+product objective, despite working inference/audio transport.
 
 The user reported Premier League hackathon footage permission and expressly
 requested the supplied league branding. Proceed within that scope. Bundled sample

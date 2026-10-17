@@ -4,7 +4,7 @@ A football vision and commentary prototype for small clubs and independent produ
 
 The application lives in [`apps/touchline`](apps/touchline). The new studio is at `/`; the existing producer desk at `/desk` turns **operator-confirmed match events** into commentary, a correctable scoreboard, player-fact overlays and exports. An optional [Python service](services/vision/README.md) adds persistent inference sessions and free WAV speech/caption exports.
 
-Current vision narration describes observations with deterministic rules. It does **not** yet identify named players, recognize reliable football actions/goals or scores, ingest an authenticated league feed, clone voices or establish broadcast-quality accuracy. The new studio is not yet deployed to the old private demo URL. Read the [complete implementation report and Claude handoff](docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md).
+Current vision narration describes observations with deterministic rules. It does **not** yet identify named players, recognize reliable football actions/goals or scores, ingest an authenticated league feed, clone voices or establish broadcast-quality accuracy. The studio is deployed privately at [Touchline](https://touchline-matchday-desk.socialpony16.chatgpt.site). Read the [latest production verification](docs/product/vision-verification-2026-10-17.md) and [full implementation report and Claude handoff](docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md).
 
 ## Run locally
 
@@ -17,7 +17,7 @@ node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1
 npm run dev
 ```
 
-Open the printed loopback URL, normally `http://127.0.0.1:5173`. The sample fixture uses fictional teams and working controls. No API key is required. Local development includes a loopback-only simulated sign-in; hosted sign-in is supplied by Sites.
+Open the printed loopback URL, normally `http://127.0.0.1:5173`. The studio includes licensed real match footage; the producer desk's sample fixture uses fictional teams. No API key is required. Local development includes a loopback-only simulated sign-in; hosted sign-in is supplied by Sites.
 
 The SQL command is for the **first local database setup only**. Preserve the `.wrangler/state` folder; do not replay an applied migration. Hosted deployments apply migrations separately.
 
@@ -46,6 +46,7 @@ Browser tests require a running dev server at port 5173, Google Chrome, and `ffm
 ## Documentation
 
 - [Latest build report and Claude Code handoff](docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md)
+- [Production vision and neural-audio verification](docs/product/vision-verification-2026-10-17.md)
 - [Optional local vision/audio service](services/vision/README.md)
 - [Free speech engines and voice provenance](docs/product/free-speech.md)
 - [Live vision/commentary research and technical decision](docs/research/live-football-vision-2026-10-17.md)

@@ -68,3 +68,9 @@ Tests cover narration boundaries, track reset, media validation, ownership,
 authorization, exports, real speech and optional real inference/voice integration.
 Tests that need absent model files skip with an explanation. Passing protocol
 tests does not establish football-event accuracy or full-match reliability.
+
+For a complete real-inference, neural-speech and audio/caption export check with
+the service running, use `.venv/bin/python scripts/verify_pipeline.py`. Add
+`--app-proxy --base-url http://127.0.0.1:5173` to include the authenticated local
+development app proxy. The script processes the licensed short clip at paced 1×;
+it is an integration test, not a football accuracy benchmark.

@@ -2,6 +2,8 @@
 
 Prepared: **17 October 2026, Europe/Berlin**. This is the latest checkpoint, written at the user's request to hand the project to Claude before the usage limit. It supersedes earlier handoffs where they describe implementation as entirely unstarted.
 
+**Subsequent progress:** final production Worker inference and real paced video-to-neural-audio/export verification passed, and the new studio was published privately. Read [the later verification/deployment record](../product/vision-verification-2026-10-17.md) before treating the pending-check/deployment sections below as current. The football action/identity and quality gaps remain open.
+
 ## 1. Executive assessment
 
 We have progressed from an operator-assisted commentary desk to a **working computer-vision prototype with a Premier League-inspired studio**. The new browser path runs an actual downloaded object detector, draws tracked boxes, generates conservative visual descriptions and can speak those descriptions. It accepts bundled footage, local uploads and a user-selected live window/screen input. An optional local Python service adds persistent sessions, CPU inference, offline voice generation and audio/caption exports.

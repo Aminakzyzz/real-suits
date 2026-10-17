@@ -2,7 +2,13 @@
 
 Updated: 17 October 2026, Europe/Berlin.
 
-## Latest build checkpoint — handoff requested
+## Latest verification and publication
+
+The new studio is now deployed at https://touchline-matchday-desk.socialpony16.chatgpt.site with owner-private access unchanged. Native deployment `appgdep_6ad365f643bc8191993ccf8da1cc82ea` succeeded for platform source `dacbc6c5e2332c5a297825ea86bc15fa8cf4c791`. The final production Worker ran actual browser inference, narration dispatch and caption export without page errors. A reproducible paced real-CV → Piper → WAV/VTT integration also passed on the complete short clip. Read [the verification record](product/vision-verification-2026-10-17.md).
+
+The same evidence shows the narration still produced only one generic observation despite several ball detections. Football action/identity intelligence, useful play-by-play, full-match reliability and customer validation remain incomplete. The full product goal is active; publication does not establish completion.
+
+## Earlier build checkpoint — handoff requested
 
 The user requested a full report to pass immediately to Claude. Read [the complete build report and continuation packet](handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md) and root `CLAUDE.md` first. Those supersede the pre-build state below.
 

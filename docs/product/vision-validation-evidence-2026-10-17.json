@@ -1,0 +1,47 @@
+{
+  "checkedOn": "2026-10-17",
+  "timezone": "Europe/Berlin",
+  "productionWorker": {
+    "checkedAt": "2026-10-17T12:08:55.153Z",
+    "baseURL": "http://127.0.0.1:5174",
+    "sourceId": "inter-ajax-u19-2012",
+    "detectedBoxes": 9,
+    "captionBytes": 112,
+    "scope": "Production Worker: real ONNX browser inference, narration dispatch, captions, producer desk and unsigned API boundaries. No football accuracy claim.",
+    "errors": []
+  },
+  "realPacedPipeline": {
+    "sourceId": "inter-ajax-u19-2012",
+    "sourceSha256": "9ef107eaf7b39c61f6511046a37f13de175b2f782c3ee4224c3118b018902b6c",
+    "sourceDurationMs": 16250,
+    "modelRevision": "eae21cee0687a91bcf9fa071605c48d7705d2d91",
+    "status": "completed",
+    "frames": 17,
+    "framesWithBallCandidate": 4,
+    "events": 1,
+    "utterances": 1,
+    "voice": "piper-en",
+    "metrics": {
+      "inferenceP50Ms": 241.7,
+      "inferenceP95Ms": 328.9,
+      "realTimeFactor": 0.954,
+      "frames": 17,
+      "events": 1
+    },
+    "audioSeconds": 16.24997732426304,
+    "sampleRate": 22050,
+    "wallSeconds": 16.56,
+    "scope": "Actual licensed short clip paced at1x, nativeCPUinference, neuralPiperWAV andVTT export throughauthenticatedlocalapp proxy. No event/identity accuracy claim."
+  },
+  "deployment": {
+    "projectId": "appgprj_6ad2c952011881918cf3fe71b87fdfab",
+    "platformSourceCommit": "dacbc6c5e2332c5a297825ea86bc15fa8cf4c791",
+    "versionId": "appgprj_6ad2c952011881918cf3fe71b87fdfab~appgver_a021e83e2a4081918c046b28386ae6d9",
+    "deploymentId": "appgdep_6ad365f643bc8191993ccf8da1cc82ea",
+    "status": "succeeded",
+    "url": "https://touchline-matchday-desk.socialpony16.chatgpt.site",
+    "audience": "owner-private (unchanged)",
+    "updatedAt": "2026-10-17T12:11:58.185903+00:00",
+    "archiveSha256": "c1df885537a117d3aab2da57c23548883e416c46b634a050dc9f63bf1c182c72"
+  }
+}
