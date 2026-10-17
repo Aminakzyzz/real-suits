@@ -6,7 +6,7 @@ Updated: 17 October 2026, Europe/Berlin.
 
 The user explicitly broadened the search beyond digital cards, suggested a Discord screen-aware study companion and AI football commentary, and authorized independently choosing and developing a product. **An end product must exist.** This supersedes the earlier implementation checkpoint and the associated blocked state; do not wait for another product-direction confirmation.
 
-The persistent thread goal retains the original broad product objective. The goal API cannot replace an unfinished objective or directly set it back to active. Work has nevertheless resumed under the user's explicit instruction; that accounting state is not a current implementation blocker.
+The persistent thread goal retains the original broad product objective. Work resumed under the user's explicit authorization and the goal is now marked **complete** for the latest requested end-product delivery. Autonomous vision, actual revenue and a public launch are not claimed as delivered requirements.
 
 ## Selected product: Touchline Desk
 
