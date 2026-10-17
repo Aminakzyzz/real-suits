@@ -1,0 +1,223 @@
+{
+  "checked_on": "2026-10-17",
+  "method": "Public GitHub and Hugging Face metadata APIs; no weights or footage downloaded.",
+  "entries": [
+    {
+      "type": "repository",
+      "id": "abdullahtarek/football_analysis",
+      "url": "https://github.com/abdullahtarek/football_analysis",
+      "revision": "e4799632cdf271cf57f4eb0c4d872cf1b7ab0f17",
+      "revision_date": "2024-04-20T08:02:44Z",
+      "default_branch": "main",
+      "detected_license": null,
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "roboflow/rf-detr",
+      "url": "https://github.com/roboflow/rf-detr",
+      "revision": "5b22dfc0940697ce1abdfa681a5f7392b3eddbfb",
+      "revision_date": "2026-10-16T05:38:07Z",
+      "default_branch": "develop",
+      "detected_license": "Apache-2.0",
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "SoccerNet/sn-gamestate",
+      "url": "https://github.com/SoccerNet/sn-gamestate",
+      "revision": "1c958345067218297d221e45e1a6405f975f83e0",
+      "revision_date": "2026-05-02T09:21:47Z",
+      "default_branch": "main",
+      "detected_license": "GPL-3.0",
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "JeremieOchin/FOOTPASS",
+      "url": "https://github.com/JeremieOchin/FOOTPASS",
+      "revision": "f63f37c1a0c6bcebf568a8ce716495a459376af5",
+      "revision_date": "2026-06-17T15:10:06Z",
+      "default_branch": "main",
+      "detected_license": "Apache-2.0",
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "haolinyang-hlyang/SoccerMaster",
+      "url": "https://github.com/haolinyang-hlyang/SoccerMaster",
+      "revision": "2e5619712d93f634b841aaf37231cd9fceb6b262",
+      "revision_date": "2026-08-22T08:14:29Z",
+      "default_branch": "main",
+      "detected_license": null,
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "WRF32-10/ME-DST",
+      "url": "https://github.com/WRF32-10/ME-DST",
+      "revision": "3e1ea3a91087c2f5557c3ee41700ed52ce8dcb96",
+      "revision_date": "2026-06-29T11:22:44Z",
+      "default_branch": "main",
+      "detected_license": null,
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "QwenLM/Qwen3-TTS",
+      "url": "https://github.com/QwenLM/Qwen3-TTS",
+      "revision": "022e286b98fbec7e1e916cb940cdf532cd9f488e",
+      "revision_date": "2026-03-17T06:38:41Z",
+      "default_branch": "main",
+      "detected_license": "Apache-2.0",
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "resemble-ai/chatterbox",
+      "url": "https://github.com/resemble-ai/chatterbox",
+      "revision": "5de7a54aa4e5e2baadb0182dde554908b48b85c2",
+      "revision_date": "2026-07-21T12:27:02Z",
+      "default_branch": "master",
+      "detected_license": "MIT",
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "resemble-ai/chatterbox-flash",
+      "url": "https://github.com/resemble-ai/chatterbox-flash",
+      "revision": "74e05baa8ce574bf2cc571702391a21f1b0d48c5",
+      "revision_date": "2026-06-01T04:39:51Z",
+      "default_branch": "master",
+      "detected_license": "MIT",
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "FoundationVision/ByteTrack",
+      "url": "https://github.com/FoundationVision/ByteTrack",
+      "revision": "d1bf0191adff59bc8fcfeaa0b33d3d1642552a99",
+      "revision_date": "2022-12-11T07:05:00Z",
+      "default_branch": "main",
+      "detected_license": "MIT",
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "PaddlePaddle/PaddleOCR",
+      "url": "https://github.com/PaddlePaddle/PaddleOCR",
+      "revision": "dab3fe35379033fdcb2d0e9572fac0b36c9a9ebf",
+      "revision_date": "2026-09-16T03:30:53Z",
+      "default_branch": "main",
+      "detected_license": "Apache-2.0",
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "repository",
+      "id": "GetStream/Vision-Agents",
+      "url": "https://github.com/GetStream/Vision-Agents",
+      "revision": "902db86438aab03fb64aa7e6ea3afdcc867a3e80",
+      "revision_date": "2026-09-23T23:09:23Z",
+      "default_branch": "main",
+      "detected_license": "Apache-2.0",
+      "scope_note": "Repository metadata only; weights, dependencies and training data require separate review."
+    },
+    {
+      "type": "model",
+      "id": "Qwen/Qwen3-TTS-12Hz-1.7B-Base",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-Base",
+      "revision": "fd4b254389122332181a7c3db7f27e918eec64e3",
+      "revision_date": "2026-01-23T05:25:33.000Z",
+      "card_license": "apache-2.0",
+      "gated": false,
+      "scope_note": "Publisher model-card metadata; not verification of training-data or voice-sample rights."
+    },
+    {
+      "type": "model",
+      "id": "Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-Base",
+      "revision": "5d83992436eae1d760afd27aff78a71d676296fc",
+      "revision_date": "2026-01-29T08:01:19.000Z",
+      "card_license": "apache-2.0",
+      "gated": false,
+      "scope_note": "Publisher model-card metadata; not verification of training-data or voice-sample rights."
+    },
+    {
+      "type": "model",
+      "id": "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",
+      "url": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",
+      "revision": "5ecdb67327fd37bb2e042aab12ff7391903235d3",
+      "revision_date": "2026-01-29T08:04:19.000Z",
+      "card_license": "apache-2.0",
+      "gated": false,
+      "scope_note": "Publisher model-card metadata; not verification of training-data or voice-sample rights."
+    },
+    {
+      "type": "model",
+      "id": "Qwen/Qwen3-VL-8B-Instruct",
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-8B-Instruct",
+      "revision": "0c351dd01ed87e9c1b53cbc748cba10e6187ff3b",
+      "revision_date": "2025-10-15T16:16:59.000Z",
+      "card_license": "apache-2.0",
+      "gated": false,
+      "scope_note": "Publisher model-card metadata; not verification of training-data or voice-sample rights."
+    },
+    {
+      "type": "model",
+      "id": "Qwen/Qwen3-VL-4B-Instruct",
+      "url": "https://huggingface.co/Qwen/Qwen3-VL-4B-Instruct",
+      "revision": "ebb281ec70b05090aa6165b016eac8ec08e71b17",
+      "revision_date": "2025-10-15T16:15:55.000Z",
+      "card_license": "apache-2.0",
+      "gated": false,
+      "scope_note": "Publisher model-card metadata; not verification of training-data or voice-sample rights."
+    },
+    {
+      "type": "model",
+      "id": "xleprime/SoccerMaster",
+      "url": "https://huggingface.co/xleprime/SoccerMaster",
+      "revision": "0d94573662dbd678df22aa5c61ae77f474b939c9",
+      "revision_date": "2026-05-03T13:07:16.000Z",
+      "card_license": "apache-2.0",
+      "gated": false,
+      "scope_note": "Publisher model-card metadata; not verification of training-data or voice-sample rights."
+    },
+    {
+      "type": "model",
+      "id": "ResembleAI/chatterbox",
+      "url": "https://huggingface.co/ResembleAI/chatterbox",
+      "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+      "revision_date": "2026-06-10T21:16:06.000Z",
+      "card_license": "mit",
+      "gated": false,
+      "scope_note": "Publisher model-card metadata; not verification of training-data or voice-sample rights."
+    },
+    {
+      "type": "model",
+      "id": "ResembleAI/chatterbox-turbo",
+      "url": "https://huggingface.co/ResembleAI/chatterbox-turbo",
+      "revision": "749d1c1a46eb10492095d68fbcf55691ccf137cd",
+      "revision_date": "2025-12-15T15:56:20.000Z",
+      "card_license": "mit",
+      "gated": false,
+      "scope_note": "Publisher model-card metadata; not verification of training-data or voice-sample rights."
+    },
+    {
+      "type": "model",
+      "id": "ResembleAI/chatterbox-flash",
+      "url": "https://huggingface.co/ResembleAI/chatterbox-flash",
+      "revision": "4385507288b8197e6dab8b4e6b1603328d549d9d",
+      "revision_date": "2026-07-06T18:55:19.000Z",
+      "card_license": "mit",
+      "gated": false,
+      "scope_note": "Publisher model-card metadata; not verification of training-data or voice-sample rights."
+    }
+  ],
+  "limitations": [
+    "Metadata snapshot only: no model weights or video were downloaded, inference was not run, and these revisions were not integration-tested.",
+    "No detected repository license is not permission to copy its code. A model-card license does not clear all dependencies or training data.",
+    "FOOTPASS LICENSE declares Apache-2.0 but README says annotations and baselines CC BY-NC 4.0. Commercial scope is unresolved; do not clear from metadata alone.",
+    "RF-DETR Apache-designated Small/Nano/Medium candidates differ from Plus/PML detection variants.",
+    "User reports Premier League hackathon permission and permission to use YouTube videos; this snapshot does not contain or authenticate the grant."
+  ]
+}

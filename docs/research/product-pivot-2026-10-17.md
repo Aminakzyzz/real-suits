@@ -1,5 +1,7 @@
 # Product pivot research — 17 October 2026
 
+**Subsequent research:** this document explains the earlier operator-assisted delivery. The user now requests autonomous video-to-commentary. See [the later research](live-football-vision-2026-10-17.md), including a direct competitor, Liat.ai, that changes the market assessment. Do not treat the decision below as a restriction on the new implementation.
+
 ## Decision
 
 Build **Touchline Desk**, a producer-assisted football commentary studio for independent clubs and match streamers. A volunteer enters confirmed match events; the studio maintains the score, prepares commentary, surfaces approved player facts, supports narration, and produces a transparent broadcast overlay and exportable match record.

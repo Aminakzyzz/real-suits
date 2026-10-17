@@ -45,6 +45,8 @@ Browser tests require a running dev server at port 5173, Google Chrome, and `ffm
 
 ## Documentation
 
+- [Live vision/commentary research and technical decision](docs/research/live-football-vision-2026-10-17.md)
+- [Claude handoff: end-to-end autonomous pipeline](docs/handoffs/CLAUDE_LIVE_PIPELINE.md)
 - [Operator guide](docs/product/touchline-operator-guide.md)
 - [Product decision and competitor research](docs/research/product-pivot-2026-10-17.md)
 - [Delivery evidence and limitations](docs/product/touchline-delivery.md)
