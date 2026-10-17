@@ -12,6 +12,8 @@ The important remaining problem is football understanding: reliably recognizing 
 
 A newer **experimental roster/jersey identity component** is included in the repository checkpoint. Its tests pass, including real Tesseract on a synthetic positive control. It has no measured accuracy on labelled football footage, no possession inference, and has not been published in the private Site release described below. Treat it as the next iteration requiring integrated review.
 
+**Subsequent action-model progress:** a pinned real temporal checkpoint now runs in an isolated CPU research adapter with a bounded causal proposal contract. Paced rolling on the short sample produced no proposals and took 35.28 seconds; a separate full-window control also supplied no foreground winner above threshold. It remains outside customer narration/scoring. The Python suite now passes 36 tests plus 23 subtests. Read [the actual action-model evaluation](../research/action-model-first-evaluation-2026-10-17.md) for exact inputs, runtime and boundaries.
+
 Commercially, the broad idea already exists. We found direct competitors, especially Liat.ai. We have a plausible club-focused positioning hypothesis, but no verified exclusive market gap, paid customer, revenue, or demonstrated willingness to pay.
 
 ## 2. User intent, scope and continuity
@@ -39,7 +41,7 @@ Repository: **https://github.com/Aminakzyzz/real-suits**, branch **main**.
 |---|---|
 | Root project | `/home/aminakziz/projects/real-suits` |
 | Last verified/published baseline root commit | `fb4d3381695d58a66bf79693cacf26d339fe625b` |
-| New handoff iteration | Experimental identity/roster code, tests and this consolidated report; use the current Git HEAD rather than resetting to the baseline. |
+| New handoff iteration | Experimental identity/roster code, causal action proposal contract, isolated real-checkpoint evaluation and this report; use current Git HEAD rather than resetting to the baseline. |
 | Private studio | https://touchline-matchday-desk.socialpony16.chatgpt.site |
 | Site ID | `appgprj_6ad2c952011881918cf3fe71b87fdfab` |
 | Published platform source | `dacbc6c5e2332c5a297825ea86bc15fa8cf4c791` |
@@ -102,6 +104,8 @@ The complete target architecture still needs replay classification, football-spe
 | `apps/touchline/lib/league.ts`, `app/api/league/route.ts` | Official context discovery, validation, normalization, cache and dated fallback. |
 | `services/vision/touchline_vision/perception.py` | Native detector, simple causal IoU tracking, histogram cut reset. |
 | `services/vision/touchline_vision/identity.py` | New experimental kit/jersey/roster evidence resolver. |
+| `services/vision/touchline_vision/actions.py` | New bounded temporal proposal contract; not enabled in customer inference. |
+| `services/vision/research`, `scripts/evaluate_action_checkpoint.py` | Isolated CPU research model adapter and reproducible actual-checkpoint evaluation. |
 | `services/vision/touchline_vision/narration.py` | Observation descriptions; latest evidence-gated player introduction. |
 | `services/vision/touchline_vision/service.py` | SQLite-backed session lifecycle, paced processing, ownership, media/audio/caption API. |
 | `services/vision/touchline_vision/speech.py`, `neural_speech.py` | eSpeak and optional pinned Piper audio adapters. |
@@ -167,9 +171,9 @@ The linked [YOLO/OpenCV tutorial](https://www.youtube.com/watch?v=neBZ6huolkg) a
 | [MatchTime](https://aclanthology.org/2024.emnlp-main.99.pdf) / [TimeSoccer](https://github.com/vpx-ecnu/TimeSoccer) | Temporal alignment and history-aware commentary research. | Training/evaluation resources, not demonstrated causal live deployment here. |
 | [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) / [Chatterbox](https://github.com/resemble-ai/chatterbox) | Possible own-voice and expressive multilingual extensions. | Researched, not installed/integrated/benchmarked. Exact model variants and terms matter. |
 
-**Newest actionable model lead:** the [OpenSportsLab 2025 E2E checkpoint](https://huggingface.co/OpenSportsLab/OSL-loc-snbas-2025-e2e) is accessible without a gate, revision `54e24a663a5a0ed057ef12cf16d9460d270ddc6e`, with a 152,081,691-byte `model.pt`. Its card lists twelve ball-action classes and publisher-reported tight/loose mAP 47.98/58.35. These results were not reproduced. The artifact is AGPL-labelled; its card requests contact for proprietary/commercial deployment. Its configuration uses temporal clips and a DALI backend, so causality, preprocessing and runtime portability need auditing before integration. Code, weight and SoccerNet training-data conditions remain separate. See `docs/research/action-checkpoint-availability-2026-10-17.json`.
+**Newest actionable model lead:** the [OpenSportsLab 2025 E2E checkpoint](https://huggingface.co/OpenSportsLab/OSL-loc-snbas-2025-e2e) is accessible without a gate, revision `54e24a663a5a0ed057ef12cf16d9460d270ddc6e`, with a 152,081,691-byte `model.pt`. Its card lists twelve ball-action classes and publisher-reported tight/loose mAP 47.98/58.35. These results were not reproduced. The artifact is AGPL-labelled; its card requests contact for proprietary/commercial deployment. Its configuration uses temporal clips and a DALI backend, and has now been executed in an isolated reconstructed CPU adapter; its benchmark was not reproduced. Preprocessing parity, useful domain performance, runtime and deployment conditions still require review before integration. Code, weight and SoccerNet training-data conditions remain separate. See `docs/research/action-checkpoint-availability-2026-10-17.json`.
 
-This is a concrete action-model starting point, not a proven drop-in solution. Do not install a large CUDA stack indiscriminately: this machine has about 15 GiB RAM, no established usable CUDA GPU, and was under memory pressure during development.
+Actual short-clip, dense-sampling and full-window controls now exist in `docs/research/action-model-first-evaluation-2026-10-17.md`; none established useful autonomous play-by-play. The model remains an executable research baseline, not a proven drop-in solution. Do not install a large CUDA stack indiscriminately: this machine has about 15 GiB RAM, no established usable CUDA GPU, and was under memory pressure during development.
 
 ### Competitors and actual gap assessment
 
@@ -224,6 +228,10 @@ In the separate detector comparison, each of RF-DETR, YOLOv9 and YOLO26 produced
 - **18 TypeScript/domain tests passed**, including two new roster-validation/leakage tests; type checking passed.
 - The six new identity tests cover repeated/independent evidence, conflicts and gaps, team/roster uniqueness, unreadable/ambiguous abstention, actual Tesseract synthetic control, cut/unreadable-frame reset and EN/ES/FR evidence-only introduction.
 - **Not rerun for this new iteration:** full app browser workflows, production Worker smoke, complete real-clip OCR integration and deployment. Do not extend the baseline browser/deployment results to this iteration automatically.
+
+### Subsequent actual action-model checks
+
+Ten new temporal contract tests passed; the full Python suite now reports **36 passed, 23 subtests passed**. Actual checkpoint loading and four research diagnostics completed. The paced rolling path returned zero proposals and lagged the short source; the unpadded longer-footage control did not produce a foreground winner above the default threshold. This is useful negative evidence, not successful football understanding. No frontend files were changed by this action-model iteration. Read `docs/research/action-model-first-evaluation-2026-10-17.md` and its linked raw evidence before choosing the next model/data step.
 
 Detailed baseline evidence: `docs/product/vision-verification-2026-10-17.md` and `vision-validation-evidence-2026-10-17.json`. Current new tests are source evidence, not an accuracy benchmark.
 
@@ -307,7 +315,7 @@ Playwright expects dev server 5173 and Chrome. The production smoke defaults to 
 
 **P0 — finish the newest identity iteration as a reviewable change.** Inspect the diff and this report. Run the roster UI through the actual local service, verify payload stripping, correct source/engine resets, optional-Tesseract behavior, mobile layout and unknown-player fallback. Evaluate actual football crops with labelled identities, including deliberate ambiguity. Repeat production smoke if the frontend changes. Publish only after that review; the current private release remains the verified baseline.
 
-**P1 — implement action understanding, the main product bottleneck.** Audit the accessible OpenSportsLab checkpoint/config, temporal receptive field, preprocessing, runtime and artifact conditions. If appropriate, adapt it behind a new bounded `actions.py` interface rather than mixing action guesses into perception. If unsuitable, keep it a research baseline and implement/train a permitted alternative. Begin with a small useful taxonomy; measure actual inferred inputs, not supplied tactical/oracle tracks. A useful action can remain anonymous when actor identity is unsupported.
+**P1 — implement useful action understanding, the main product bottleneck.** A bounded `actions.py` proposal interface and actual isolated OpenSportsLab research adapter now exist. Read the negative/limited evaluation first. Review preprocessing parity and evaluate permitted broadcast-quality footage with independent labels before choosing adaptation or replacement; the current spectator clips did not establish usable actions. Keep model guesses separate from accepted incidents. If unsuitable, keep it a research baseline and implement/train a permitted alternative. Begin with a small useful taxonomy; measure actual inferred inputs, not supplied tactical/oracle tracks. A useful action can remain anonymous when actor identity is unsupported.
 
 **P1 — build evidence/state and better commentary scheduling.** Store source event time, latest evidence time, decision time, confidence per event/team/actor/outcome and provenance. Handle candidate → confirmed → corrected incidents, replay deduplication and score changes separately. Ground wording in accepted facts, keep deterministic fallback and prioritize meaningful play over repeated counts. Translation should use the same structured facts, not invent statistics.
 
@@ -334,13 +342,15 @@ Proposed gates: a contiguous 10–15-minute permitted, paced autonomous demo wit
 
 ## 12. Paste this into Claude Code
 
-> Continue Touchline in `/home/aminakziz/projects/real-suits` on the current branch. Read `CLAUDE.md`, then `docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md`. The verified private deployment has real generic CV and description narration; a separate complete short-clip local neural-audio/export pipeline also passed. The newest roster/jersey identity iteration passes 26 Python tests plus 23 subtests and 18 TypeScript/domain tests, but needs integrated UI/real-football/production verification and is not deployed. Preserve the user's original untracked plan, media attribution, reported Premier League hackathon scope and owner-private audience. First finish reviewing this iteration, then implement and evaluate causal football action understanding, evidence-grounded commentary scheduling and full-match reliability. Inspect the pinned OpenSportsLab 12-class action checkpoint as a possible research adapter; do not assume its causality, runtime or commercial deployment conditions. Use free authorized speech. Do not present generic descriptions, synthetic OCR controls, a manual event log or a successful deployment as completed autonomous football commentary. Keep the full customer-product goal active until its actual acceptance evidence exists. Update the report with exact results and next steps.
+> Continue Touchline in `/home/aminakziz/projects/real-suits` on the current branch. Read `CLAUDE.md`, then `docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md`. The verified private deployment has real generic CV and description narration; a separate complete short-clip local neural-audio/export pipeline also passed. The newest roster/jersey identity iteration needs integrated UI/real-football/production verification and is not deployed. Subsequent action-model work adds a bounded causal proposal interface and an isolated executable checkpoint adapter; actual research results remain insufficient for useful commentary. Current Python suite: 36 tests plus 23 subtests; prior TypeScript/domain suite: 18 passed. Preserve the user's original untracked plan, media attribution, reported Premier League hackathon scope and owner-private audience. First finish reviewing this iteration, then implement and evaluate causal football action understanding, evidence-grounded commentary scheduling and full-match reliability. Read the actual OpenSportsLab checkpoint evaluation and reusable research runner before further model work; do not confuse its executed research baseline with a usable or commercially cleared action layer. Use free authorized speech. Do not present generic descriptions, synthetic OCR controls, a manual event log or a successful deployment as completed autonomous football commentary. Keep the full customer-product goal active until its actual acceptance evidence exists. Update the report with exact results and next steps.
 
 ## 13. Supporting records
 
 - `docs/product/vision-verification-2026-10-17.md` and `vision-validation-evidence-2026-10-17.json`: published baseline and actual integration evidence.
 - `docs/research/live-football-vision-2026-10-17.md`: detailed technical research, sources, dataset/model boundaries and proposed architecture.
-- `docs/research/action-checkpoint-availability-2026-10-17.json`: newest accessible action checkpoint revisions/file sizes.
+- `docs/research/action-model-first-evaluation-2026-10-17.md` and `docs/product/action-model-evidence-2026-10-17.json`: actual checkpoint experiments and next model/data decision.
+- `services/vision/research/README.md`: isolated CPU setup, exact hashes and executable evaluation commands.
+- `docs/research/action-checkpoint-availability-2026-10-17.json`: accessible action checkpoint revisions/file sizes and updated execution state.
 - `docs/research/source-snapshot-2026-10-17.json`: inspected repository/model provenance.
 - `docs/research/initial-detector-comparison-2026-10-17.json`: limited, non-ground-truth detector comparison.
 - `docs/research/media-and-brand-sources-2026-10-17.md`: actual footage, official design/data sources and attribution.

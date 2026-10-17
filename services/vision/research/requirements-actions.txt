@@ -1,0 +1,7 @@
+# Isolated research environment, not the base application service.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.9.1+cpu
+torchvision==0.24.1+cpu
+timm==1.0.22
+numpy==2.4.6
+opencv-python-headless==5.0.0.93

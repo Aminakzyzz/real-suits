@@ -12,8 +12,8 @@ be committed or rewritten without instruction.
 The published baseline runs real generic person/ball detection and conservative
 visual observation narration. The newer repository iteration adds experimental
 roster/kit/jersey identity evidence, not yet integrated-browser/real-football
-validated or published. Latest checks: 26 Python tests plus 23 subtests, 18
-TypeScript/domain tests and type checking passed. Do not claim reliable
+validated or published. Latest Python suite: 36 tests plus 23 subtests passed. The prior frontend
+checkpoint passed 18 TypeScript/domain tests and type checking. Do not claim reliable
 named-player play-by-play or automatic rule-event/score recognition is done.
 Subsequent production verification and private deployment succeeded. Read
 `docs/product/vision-verification-2026-10-17.md` for the latest evidence and
@@ -29,3 +29,10 @@ Avoid worker-loading regressions: the browser detector uses a Vite `?worker`
 constructor, static pinned external ONNX Runtime ESM import, and
 `worker.format = 'es'` in Vite. Verify the production Worker, not only a standalone
 Vite harness, before publishing.
+
+The action checkpoint has now been executed in isolated CPU research, with a
+bounded causal proposal module at `services/vision/touchline_vision/actions.py`.
+Read `docs/research/action-model-first-evaluation-2026-10-17.md`: the actual
+short/long-window runs did not establish useful football actions or live CPU
+performance. This adapter is not enabled in customer narration/scoring. Preserve
+that boundary until representative labelled evaluation supports adoption.

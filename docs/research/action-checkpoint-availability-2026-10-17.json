@@ -25,7 +25,8 @@
           "size": 152081691
         }
       ],
-      "status": "Checkpoint availability and config inspected; not installed, executed, or commercially cleared."
+      "status": "Downloaded and executed in an isolated CPU research adapter on licensed footage; not integrated into customer narration or scoring. Commercial deployment conditions remain unresolved. See action-model-first-evaluation-2026-10-17.md.",
+      "sha256": "2352f17f60de586d7531b07f88ae4d618b46c1f8a4904837b0493ea15767307c"
     },
     {
       "repo": "OpenSportsLab/OSL-loc-snbas-2023-e2e",
