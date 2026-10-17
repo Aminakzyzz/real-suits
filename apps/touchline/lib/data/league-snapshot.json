@@ -1,0 +1,564 @@
+{
+  "updatedAtISO": "2026-10-17T11:49:45.429756+00:00",
+  "sourceUrl": "https://www.premierleague.com/en",
+  "season": "2026/27",
+  "seasonId": 2026,
+  "matchweek": 7,
+  "standingsMatchweek": 6,
+  "fixtureSourceUrl": "https://sdp-prem-prod.premier-league-prod.pulselive.com/api/v1/competitions/8/seasons/2026/matchweeks/7/matches",
+  "standingsSourceUrl": "https://sdp-prem-prod.premier-league-prod.pulselive.com/api/v5/competitions/8/seasons/2026/standings",
+  "fixtures": [
+    {
+      "id": "2645258",
+      "home": {
+        "id": "11",
+        "name": "Everton",
+        "shortName": "Everton",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/11.svg",
+        "score": 0
+      },
+      "away": {
+        "id": "8",
+        "name": "Chelsea",
+        "shortName": "Chelsea",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/8.svg",
+        "score": 0
+      },
+      "kickoff": "2026-10-17T11:30:00+00:00",
+      "kickoffLocal": "2026-10-17 12:30:00",
+      "kickoffTimezone": "BST",
+      "venue": "Hill Dickinson Stadium, Liverpool",
+      "status": "FirstHalf",
+      "clock": "17"
+    },
+    {
+      "id": "2645256",
+      "home": {
+        "id": "94",
+        "name": "Brentford",
+        "shortName": "Brentford",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/94.svg"
+      },
+      "away": {
+        "id": "14",
+        "name": "Liverpool",
+        "shortName": "Liverpool",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/14.svg"
+      },
+      "kickoff": "2026-10-17T14:00:00+00:00",
+      "kickoffLocal": "2026-10-17 15:00:00",
+      "kickoffTimezone": "BST",
+      "venue": "Gtech Community Stadium, Brentford",
+      "status": "PreMatch"
+    },
+    {
+      "id": "2645259",
+      "home": {
+        "id": "54",
+        "name": "Fulham",
+        "shortName": "Fulham",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/54.svg"
+      },
+      "away": {
+        "id": "88",
+        "name": "Hull City",
+        "shortName": "Hull",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/88.svg"
+      },
+      "kickoff": "2026-10-17T14:00:00+00:00",
+      "kickoffLocal": "2026-10-17 15:00:00",
+      "kickoffTimezone": "BST",
+      "venue": "Craven Cottage, London",
+      "status": "PreMatch"
+    },
+    {
+      "id": "2645261",
+      "home": {
+        "id": "43",
+        "name": "Manchester City",
+        "shortName": "Man City",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/43.svg"
+      },
+      "away": {
+        "id": "40",
+        "name": "Ipswich Town",
+        "shortName": "Ipswich",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/40.svg"
+      },
+      "kickoff": "2026-10-17T14:00:00+00:00",
+      "kickoffLocal": "2026-10-17 15:00:00",
+      "kickoffTimezone": "BST",
+      "venue": "Etihad Stadium, Manchester",
+      "status": "PreMatch"
+    },
+    {
+      "id": "2645262",
+      "home": {
+        "id": "4",
+        "name": "Newcastle United",
+        "shortName": "Newcastle",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/4.svg"
+      },
+      "away": {
+        "id": "7",
+        "name": "Aston Villa",
+        "shortName": "Aston Villa",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/7.svg"
+      },
+      "kickoff": "2026-10-17T16:30:00+00:00",
+      "kickoffLocal": "2026-10-17 17:30:00",
+      "kickoffTimezone": "BST",
+      "venue": "St. James' Park, Newcastle",
+      "status": "PreMatch"
+    },
+    {
+      "id": "2645255",
+      "home": {
+        "id": "91",
+        "name": "Bournemouth",
+        "shortName": "Bournemouth",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/91.svg"
+      },
+      "away": {
+        "id": "56",
+        "name": "Sunderland",
+        "shortName": "Sunderland",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/56.svg"
+      },
+      "kickoff": "2026-10-18T13:00:00+00:00",
+      "kickoffLocal": "2026-10-18 14:00:00",
+      "kickoffTimezone": "BST",
+      "venue": "Vitality Stadium, Bournemouth",
+      "status": "PreMatch"
+    },
+    {
+      "id": "2645257",
+      "home": {
+        "id": "36",
+        "name": "Brighton and Hove Albion",
+        "shortName": "Brighton",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/36.svg"
+      },
+      "away": {
+        "id": "31",
+        "name": "Crystal Palace",
+        "shortName": "Crystal Palace",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/31.svg"
+      },
+      "kickoff": "2026-10-18T13:00:00+00:00",
+      "kickoffLocal": "2026-10-18 14:00:00",
+      "kickoffTimezone": "BST",
+      "venue": "American Express Stadium, Falmer",
+      "status": "PreMatch"
+    },
+    {
+      "id": "2645260",
+      "home": {
+        "id": "2",
+        "name": "Leeds United",
+        "shortName": "Leeds",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/2.svg"
+      },
+      "away": {
+        "id": "1",
+        "name": "Manchester United",
+        "shortName": "Man Utd",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/1.svg"
+      },
+      "kickoff": "2026-10-18T13:00:00+00:00",
+      "kickoffLocal": "2026-10-18 14:00:00",
+      "kickoffTimezone": "BST",
+      "venue": "Elland Road, Leeds",
+      "status": "PreMatch"
+    },
+    {
+      "id": "2645263",
+      "home": {
+        "id": "17",
+        "name": "Nottingham Forest",
+        "shortName": "Nott'm Forest",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/17.svg"
+      },
+      "away": {
+        "id": "3",
+        "name": "Arsenal",
+        "shortName": "Arsenal",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/3.svg"
+      },
+      "kickoff": "2026-10-18T15:30:00+00:00",
+      "kickoffLocal": "2026-10-18 16:30:00",
+      "kickoffTimezone": "BST",
+      "venue": "The City Ground, Nottingham",
+      "status": "PreMatch"
+    },
+    {
+      "id": "2645264",
+      "home": {
+        "id": "6",
+        "name": "Tottenham Hotspur",
+        "shortName": "Spurs",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/6.svg"
+      },
+      "away": {
+        "id": "9",
+        "name": "Coventry City",
+        "shortName": "Coventry",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/9.svg"
+      },
+      "kickoff": "2026-10-19T19:00:00+00:00",
+      "kickoffLocal": "2026-10-19 20:00:00",
+      "kickoffTimezone": "BST",
+      "venue": "Tottenham Hotspur Stadium, London",
+      "status": "PreMatch"
+    }
+  ],
+  "standings": [
+    {
+      "position": 1,
+      "team": {
+        "id": "43",
+        "name": "Manchester City",
+        "shortName": "Man City",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/43.svg"
+      },
+      "played": 6,
+      "won": 6,
+      "drawn": 0,
+      "lost": 0,
+      "goalsFor": 16,
+      "goalsAgainst": 5,
+      "goalDifference": 11,
+      "points": 18
+    },
+    {
+      "position": 2,
+      "team": {
+        "id": "3",
+        "name": "Arsenal",
+        "shortName": "Arsenal",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/3.svg"
+      },
+      "played": 6,
+      "won": 5,
+      "drawn": 0,
+      "lost": 1,
+      "goalsFor": 10,
+      "goalsAgainst": 5,
+      "goalDifference": 5,
+      "points": 15
+    },
+    {
+      "position": 3,
+      "team": {
+        "id": "36",
+        "name": "Brighton and Hove Albion",
+        "shortName": "Brighton",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/36.svg"
+      },
+      "played": 6,
+      "won": 4,
+      "drawn": 1,
+      "lost": 1,
+      "goalsFor": 18,
+      "goalsAgainst": 5,
+      "goalDifference": 13,
+      "points": 13
+    },
+    {
+      "position": 4,
+      "team": {
+        "id": "94",
+        "name": "Brentford",
+        "shortName": "Brentford",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/94.svg"
+      },
+      "played": 6,
+      "won": 2,
+      "drawn": 4,
+      "lost": 0,
+      "goalsFor": 12,
+      "goalsAgainst": 6,
+      "goalDifference": 6,
+      "points": 10
+    },
+    {
+      "position": 5,
+      "team": {
+        "id": "11",
+        "name": "Everton",
+        "shortName": "Everton",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/11.svg"
+      },
+      "played": 6,
+      "won": 2,
+      "drawn": 4,
+      "lost": 0,
+      "goalsFor": 8,
+      "goalsAgainst": 5,
+      "goalDifference": 3,
+      "points": 10
+    },
+    {
+      "position": 6,
+      "team": {
+        "id": "8",
+        "name": "Chelsea",
+        "shortName": "Chelsea",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/8.svg"
+      },
+      "played": 6,
+      "won": 3,
+      "drawn": 1,
+      "lost": 2,
+      "goalsFor": 15,
+      "goalsAgainst": 13,
+      "goalDifference": 2,
+      "points": 10
+    },
+    {
+      "position": 7,
+      "team": {
+        "id": "2",
+        "name": "Leeds United",
+        "shortName": "Leeds",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/2.svg"
+      },
+      "played": 6,
+      "won": 2,
+      "drawn": 3,
+      "lost": 1,
+      "goalsFor": 8,
+      "goalsAgainst": 5,
+      "goalDifference": 3,
+      "points": 9
+    },
+    {
+      "position": 8,
+      "team": {
+        "id": "88",
+        "name": "Hull City",
+        "shortName": "Hull",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/88.svg"
+      },
+      "played": 6,
+      "won": 2,
+      "drawn": 3,
+      "lost": 1,
+      "goalsFor": 8,
+      "goalsAgainst": 6,
+      "goalDifference": 2,
+      "points": 9
+    },
+    {
+      "position": 9,
+      "team": {
+        "id": "14",
+        "name": "Liverpool",
+        "shortName": "Liverpool",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/14.svg"
+      },
+      "played": 6,
+      "won": 2,
+      "drawn": 3,
+      "lost": 1,
+      "goalsFor": 7,
+      "goalsAgainst": 7,
+      "goalDifference": 0,
+      "points": 9
+    },
+    {
+      "position": 10,
+      "team": {
+        "id": "40",
+        "name": "Ipswich Town",
+        "shortName": "Ipswich",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/40.svg"
+      },
+      "played": 6,
+      "won": 3,
+      "drawn": 0,
+      "lost": 3,
+      "goalsFor": 9,
+      "goalsAgainst": 12,
+      "goalDifference": -3,
+      "points": 9
+    },
+    {
+      "position": 11,
+      "team": {
+        "id": "4",
+        "name": "Newcastle United",
+        "shortName": "Newcastle",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/4.svg"
+      },
+      "played": 6,
+      "won": 2,
+      "drawn": 2,
+      "lost": 2,
+      "goalsFor": 10,
+      "goalsAgainst": 13,
+      "goalDifference": -3,
+      "points": 8
+    },
+    {
+      "position": 12,
+      "team": {
+        "id": "31",
+        "name": "Crystal Palace",
+        "shortName": "Crystal Palace",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/31.svg"
+      },
+      "played": 6,
+      "won": 2,
+      "drawn": 1,
+      "lost": 3,
+      "goalsFor": 9,
+      "goalsAgainst": 12,
+      "goalDifference": -3,
+      "points": 7
+    },
+    {
+      "position": 13,
+      "team": {
+        "id": "1",
+        "name": "Manchester United",
+        "shortName": "Man Utd",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/1.svg"
+      },
+      "played": 6,
+      "won": 1,
+      "drawn": 3,
+      "lost": 2,
+      "goalsFor": 9,
+      "goalsAgainst": 9,
+      "goalDifference": 0,
+      "points": 6
+    },
+    {
+      "position": 14,
+      "team": {
+        "id": "9",
+        "name": "Coventry City",
+        "shortName": "Coventry",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/9.svg"
+      },
+      "played": 6,
+      "won": 2,
+      "drawn": 0,
+      "lost": 4,
+      "goalsFor": 5,
+      "goalsAgainst": 11,
+      "goalDifference": -6,
+      "points": 6
+    },
+    {
+      "position": 15,
+      "team": {
+        "id": "17",
+        "name": "Nottingham Forest",
+        "shortName": "Nott'm Forest",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/17.svg"
+      },
+      "played": 6,
+      "won": 1,
+      "drawn": 2,
+      "lost": 3,
+      "goalsFor": 5,
+      "goalsAgainst": 8,
+      "goalDifference": -3,
+      "points": 5
+    },
+    {
+      "position": 16,
+      "team": {
+        "id": "7",
+        "name": "Aston Villa",
+        "shortName": "Aston Villa",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/7.svg"
+      },
+      "played": 6,
+      "won": 1,
+      "drawn": 2,
+      "lost": 3,
+      "goalsFor": 6,
+      "goalsAgainst": 11,
+      "goalDifference": -5,
+      "points": 5
+    },
+    {
+      "position": 17,
+      "team": {
+        "id": "56",
+        "name": "Sunderland",
+        "shortName": "Sunderland",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/56.svg"
+      },
+      "played": 6,
+      "won": 1,
+      "drawn": 1,
+      "lost": 4,
+      "goalsFor": 6,
+      "goalsAgainst": 12,
+      "goalDifference": -6,
+      "points": 4
+    },
+    {
+      "position": 18,
+      "team": {
+        "id": "91",
+        "name": "Bournemouth",
+        "shortName": "Bournemouth",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/91.svg"
+      },
+      "played": 6,
+      "won": 0,
+      "drawn": 3,
+      "lost": 3,
+      "goalsFor": 7,
+      "goalsAgainst": 13,
+      "goalDifference": -6,
+      "points": 3
+    },
+    {
+      "position": 19,
+      "team": {
+        "id": "6",
+        "name": "Tottenham Hotspur",
+        "shortName": "Spurs",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/6.svg"
+      },
+      "played": 6,
+      "won": 0,
+      "drawn": 3,
+      "lost": 3,
+      "goalsFor": 3,
+      "goalsAgainst": 9,
+      "goalDifference": -6,
+      "points": 3
+    },
+    {
+      "position": 20,
+      "team": {
+        "id": "54",
+        "name": "Fulham",
+        "shortName": "Fulham",
+        "badgeUrl": "https://resources.premierleague.com/premierleague25/badges/54.svg"
+      },
+      "played": 6,
+      "won": 0,
+      "drawn": 2,
+      "lost": 4,
+      "goalsFor": 6,
+      "goalsAgainst": 10,
+      "goalDifference": -4,
+      "points": 2
+    }
+  ],
+  "articles": [
+    {
+      "title": "LIVE: Follow the action between Everton and Chelsea Get updates and FPL insight in the first of FIVE Saturday matches News",
+      "url": "https://www.premierleague.com/en/matchweek/2026_7/blog",
+      "imageUrl": "https://resources.premierleague.pulselive.com/photo-resources/2026/10/17/da1df1d4-2395-4c55-81c5-446b453ae307/2300066697.jpg?width=1164"
+    }
+  ]
+}

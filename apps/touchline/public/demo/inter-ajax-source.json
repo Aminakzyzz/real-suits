@@ -1,0 +1,21 @@
+{
+  "id": "inter-ajax-u19-2012",
+  "name": "Inter–Ajax U19 · licensed match sample",
+  "kind": "sample",
+  "durationMs": 16250,
+  "mediaUrl": "/demo/football.mp4",
+  "posterUrl": "/demo/poster.jpg",
+  "description": "U19 football footage filmed by zilupe, 26 March 2012. Close spectator camera with actual play; this is not a Premier League match.",
+  "changes": "Full contiguous video converted from WebM to browser-compatible H.264 yuv420p MP4, muted, resolution retained at 1280×720.",
+  "bytes": 2778850,
+  "sha256": "9ef107eaf7b39c61f6511046a37f13de175b2f782c3ee4224c3118b018902b6c",
+  "provenance": {
+    "url": "https://commons.wikimedia.org/wiki/File:Next_Generation._U19._Inter_vs_Ajax._Ajax_goal..webm",
+    "originalUrl": "https://www.flickr.com/photos/zilupe/7018838149/",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+    "attribution": "“Next Generation. U19. Inter vs Ajax. Ajax goal.” by zilupe, via Flickr / Wikimedia Commons, CC BY 2.0. Re-encoded and muted by Touchline.",
+    "licenseVerification": "Commons external-source review remains pending; original Flickr page was fetched directly on 17 October 2026 and its JSON-LD license field explicitly links CC BY 2.0.",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Next_Generation._U19._Inter_vs_Ajax._Ajax_goal..webm?download=1"
+  }
+}

@@ -1,5 +1,7 @@
 # Claude continuation: autonomous football commentary
 
+**Superseded implementation checkpoint:** read [the later full build report](BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md) first. This file preserves the original research-to-implementation plan; parts of it are now implemented.
+
 Prepared 17 October 2026. Read this file, [the research decision](../research/live-football-vision-2026-10-17.md) and [project status](../PROJECT_STATUS.md) before changing the app.
 
 ## User's current direction

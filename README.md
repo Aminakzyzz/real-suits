@@ -1,10 +1,10 @@
 # Touchline Desk
 
-A working football commentary and broadcast desk for small clubs and independent producers. Built in this existing repository after researching the original digital-card concept and the later Discord/sports ideas.
+A football vision and commentary prototype for small clubs and independent producers. The new studio runs actual on-device person/ball detection, conservative visual narration, local video and live-window input, with a Premier League-inspired interface and sourced league information.
 
-The application lives in [`apps/touchline`](apps/touchline). It turns **operator-confirmed match events** into commentary in English, Spanish and French, a correctable scoreboard, approved player-fact overlays, device-voice narration, and production exports.
+The application lives in [`apps/touchline`](apps/touchline). The new studio is at `/`; the existing producer desk at `/desk` turns **operator-confirmed match events** into commentary, a correctable scoreboard, player-fact overlays and exports. An optional [Python service](services/vision/README.md) adds persistent inference sessions and free WAV speech/caption exports.
 
-This release uses structured commentary templates. It does **not** recognize players from video, ingest LaLiga/Premier League/Champions League feeds, clone voices or claim to be a newly trained AI model.
+Current vision narration describes observations with deterministic rules. It does **not** yet identify named players, recognize reliable football actions/goals or scores, ingest an authenticated league feed, clone voices or establish broadcast-quality accuracy. The new studio is not yet deployed to the old private demo URL. Read the [complete implementation report and Claude handoff](docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md).
 
 ## Run locally
 
@@ -45,6 +45,9 @@ Browser tests require a running dev server at port 5173, Google Chrome, and `ffm
 
 ## Documentation
 
+- [Latest build report and Claude Code handoff](docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md)
+- [Optional local vision/audio service](services/vision/README.md)
+- [Free speech engines and voice provenance](docs/product/free-speech.md)
 - [Live vision/commentary research and technical decision](docs/research/live-football-vision-2026-10-17.md)
 - [Claude handoff: end-to-end autonomous pipeline](docs/handoffs/CLAUDE_LIVE_PIPELINE.md)
 - [Operator guide](docs/product/touchline-operator-guide.md)

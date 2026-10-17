@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Touchline — Every match has a story",
+  title: "Touchline — AI Match Studio",
   description:
-    "Turn confirmed football events into multilingual commentary, player stories and broadcast graphics.",
+    "Watch football through a new lens. Computer vision, multilingual commentary and a match studio built for the game.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

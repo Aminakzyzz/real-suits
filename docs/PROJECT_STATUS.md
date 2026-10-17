@@ -2,13 +2,23 @@
 
 Updated: 17 October 2026, Europe/Berlin.
 
-## Latest authorization and objective
+## Latest build checkpoint — handoff requested
+
+The user requested a full report to pass immediately to Claude. Read [the complete build report and continuation packet](handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md) and root `CLAUDE.md` first. Those supersede the pre-build state below.
+
+Implemented locally: a Premier League-inspired studio at `/`, preserved producer desk at `/desk`, actual RF-DETR browser inference with on-device visual narration, file/live-window inputs, an optional Python CPU inference service with SQLite sessions and audio/caption exports, free EN/ES/FR eSpeak voices, optional English Piper neural speech, and a sourced current league refresh with dated fallback. Bundled default footage is licensed Inter–Ajax U19, not a Premier League archive download.
+
+Verification: 20 Python tests (23 subtests), 16 TypeScript/domain tests during integration, six existing Chrome workflows, actual browser inference/narration and responsive screenshots. Production build succeeded during integration; exact final-source production browser smoke and new deployment are still pending. The report records the last worker/source changes and necessary retests. No action/identity accuracy, full-match reliability or revenue claim is made.
+
+The current detector is generic and track IDs are temporary. Named-player identity, reliable actions/possession/goals, professional commentary and full-match/customer validation remain unfinished. The autonomous product objective remains open. The old hosted URL still serves the earlier operator-assisted release; do not present it as the new studio.
+
+## Authorization and pre-build research history
 
 The latest request advances Touchline from manually entered moments to **live video → computer vision → player/action understanding → multilingual commentary → generated speech → synchronized viewing**. The user requested deeper current research and a concrete handoff for Claude to continue implementation. The earlier operator-assisted release does not fulfill this new autonomous-pipeline objective.
 
 During this research the user reported permission from a colleague for participation in a Premier League hackathon and said YouTube videos can also be used. Treat this as authorization for the hackathon prototype; do not repeatedly ask for the same permission. Exact source delivery and permission scope were not supplied. Keep footage/model/dataset/voice/customer-release permissions distinct without blocking independent implementation work.
 
-**Current milestone:** research and Claude handoff prepared; autonomous implementation and evaluation remain pending. Read [live football research](research/live-football-vision-2026-10-17.md), [Claude continuation instructions](handoffs/CLAUDE_LIVE_PIPELINE.md) and [source revisions/license metadata](research/source-snapshot-2026-10-17.json). No video download, model training/inference, new live-feed integration, voice cloning or redeployment was performed in this research milestone.
+**Earlier research milestone:** research and initial Claude handoff were prepared before implementation. Read [live football research](research/live-football-vision-2026-10-17.md), [the initial implementation plan](handoffs/CLAUDE_LIVE_PIPELINE.md) and [source revisions/license metadata](research/source-snapshot-2026-10-17.json) for background. Actual video downloads and inference were subsequently implemented as described in the latest build checkpoint.
 
 The earlier user instruction remains: **an end product must exist**. It authorized independently choosing and developing a product. The previous goal was completed for the earlier manual product delivery; the new vision-to-commentary product is not complete. Continue from the handoff rather than treating the previous completion record as completion of the new request.
 

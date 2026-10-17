@@ -1,0 +1,22 @@
+{
+  "id": "ajax-utrecht-2024",
+  "name": "Ajax–Utrecht · open licensed match sample",
+  "description": "Eredivisie, 4 December 2024. Spectator camera; small players and crowd occlusion make this a challenging vision input.",
+  "durationMs": 30000,
+  "kind": "sample",
+  "mediaUrl": "/demo/ajax-utrecht.mp4",
+  "posterUrl": "/demo/ajax-utrecht-poster.jpg",
+  "sourceOffsetMs": 630000,
+  "changes": "Contiguous 10:30–11:00 excerpt from the Commons 1080p transcode; resized to 1280×720, re-encoded H.264 yuv420p and muted. Original camera changes and watermark retained.",
+  "sha256": "5ec0ff3151b9dc0a73c47ba9bdd5c8bf3cc1e4879ecde2aa1ff1ae031bcf65c2",
+  "bytes": 2992474,
+  "provenance": {
+    "url": "https://commons.wikimedia.org/wiki/File:Ajax_v_Utrecht_Dec_2024_edited.webm",
+    "license": "CC BY 3.0",
+    "attribution": "“Ajax v Utrecht Dec 2024 edited” by FCUFAN, via Wikimedia Commons; CC BY 3.0. Excerpted, resized, re-encoded and muted by Touchline.",
+    "originalUrl": "https://www.youtube.com/watch?v=WN1AU7oJjRA",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "downloadUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/3/3e/Ajax_v_Utrecht_Dec_2024_edited.webm/Ajax_v_Utrecht_Dec_2024_edited.webm.1080p.vp9.webm?download=1",
+    "licenseReview": "Wikimedia Commons records a license review on 25 February 2026."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "latvia-gibraltar-2026",
+  "name": "Latvia–Gibraltar · CC0 camera sample",
+  "durationMs": 16903,
+  "kind": "sample",
+  "mediaUrl": "/demo/latvia-gibraltar.mp4",
+  "description": "Behind-goal spectator camera, smoke and goalkeeper, useful camera robustness sample but little visible active play.",
+  "changes": "Resized to 1280×720, re-encoded H.264 yuv420p, muted.",
+  "sha256": "4304e97c0b6f69b4f4adeb2a41f84d21001d78d4cd89049c381c4eca645ce8f6",
+  "bytes": 1631592,
+  "provenance": {
+    "url": "https://commons.wikimedia.org/wiki/File:Latvia-Gibraltar_football_2026-03-31.webm",
+    "license": "CC0 1.0",
+    "attribution": "Mārtiņš Bruņenieks (Papuass), via Wikimedia Commons, CC0 1.0. Resized, re-encoded and muted.",
+    "originalUrl": "https://upload.wikimedia.org/wikipedia/commons/0/06/Latvia-Gibraltar_football_2026-03-31.webm",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+  }
+}

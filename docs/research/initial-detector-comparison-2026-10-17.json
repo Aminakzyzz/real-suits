@@ -1,0 +1,449 @@
+{
+  "sampling": "One sampled frame at each integer source second from 0 through 16; covers whole clip, not every frame.",
+  "preprocess": "RFDETR official RGB384 resize float01; YOLO letterbox RGB float01.",
+  "thresholds": {
+    "rfdetr": 0.3,
+    "yolov9": 0.2,
+    "yolo26": 0.1
+  },
+  "precisionRecall": "Not measured: no full manual annotations. Candidate coverage is not recall.",
+  "summary": {
+    "rfdetr": {
+      "framesWithBallCandidate": 4,
+      "sampledFrames": 17,
+      "meanInferenceMs": 282.78
+    },
+    "yolov9": {
+      "framesWithBallCandidate": 4,
+      "sampledFrames": 17,
+      "meanInferenceMs": 1015.14
+    },
+    "yolo26": {
+      "framesWithBallCandidate": 4,
+      "sampledFrames": 17,
+      "meanInferenceMs": 2124.37
+    }
+  },
+  "frames": [
+    {
+      "seconds": 0,
+      "rfdetr": {
+        "people": 10,
+        "ball": null,
+        "inferenceMs": 366.34
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.07836702466011047,
+        "inferenceMs": 1203.42
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.07692182064056396,
+        "inferenceMs": 2184.88
+      }
+    },
+    {
+      "seconds": 1,
+      "rfdetr": {
+        "people": 10,
+        "ball": {
+          "box": [
+            0.23085770453326404,
+            0.7445387286134064,
+            0.2380481616128236,
+            0.7560796099714935
+          ],
+          "confidence": 0.5414
+        },
+        "inferenceMs": 232.32
+      },
+      "yolov9": {
+        "candidates": [
+          {
+            "box": [
+              282.23,
+              531.28,
+              306.68,
+              544.34
+            ],
+            "confidence": 0.42865
+          }
+        ],
+        "maxRawBallConfidence": 0.4286530613899231,
+        "inferenceMs": 886.94
+      },
+      "yolo26": {
+        "candidates": [
+          {
+            "box": [
+              292.25,
+              535.43,
+              303.75,
+              546.87
+            ],
+            "confidence": 0.75996
+          }
+        ],
+        "maxRawBallConfidence": 0.7599557638168335,
+        "inferenceMs": 1855.7
+      }
+    },
+    {
+      "seconds": 2,
+      "rfdetr": {
+        "people": 10,
+        "ball": {
+          "box": [
+            0.22072128718718886,
+            0.6820794204249978,
+            0.22959612542763352,
+            0.6974398037418723
+          ],
+          "confidence": 0.4583
+        },
+        "inferenceMs": 216.35
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.16259709000587463,
+        "inferenceMs": 832.93
+      },
+      "yolo26": {
+        "candidates": [
+          {
+            "box": [
+              281.83,
+              490.38,
+              293.96,
+              502.52
+            ],
+            "confidence": 0.29631
+          }
+        ],
+        "maxRawBallConfidence": 0.29631364345550537,
+        "inferenceMs": 1721.21
+      }
+    },
+    {
+      "seconds": 3,
+      "rfdetr": {
+        "people": 12,
+        "ball": {
+          "box": [
+            0.17085750866681337,
+            0.7099427618086338,
+            0.18248466681689024,
+            0.7291051708161831
+          ],
+          "confidence": 0.4641
+        },
+        "inferenceMs": 206.38
+      },
+      "yolov9": {
+        "candidates": [
+          {
+            "box": [
+              209.95,
+              507.32,
+              235.26,
+              521.0
+            ],
+            "confidence": 0.30378
+          }
+        ],
+        "maxRawBallConfidence": 0.3037751615047455,
+        "inferenceMs": 832.69
+      },
+      "yolo26": {
+        "candidates": [
+          {
+            "box": [
+              218.0,
+              511.12,
+              233.25,
+              525.82
+            ],
+            "confidence": 0.81809
+          }
+        ],
+        "maxRawBallConfidence": 0.8180907964706421,
+        "inferenceMs": 1682.19
+      }
+    },
+    {
+      "seconds": 4,
+      "rfdetr": {
+        "people": 9,
+        "ball": null,
+        "inferenceMs": 207.03
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.044551312923431396,
+        "inferenceMs": 855.93
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.022311121225357056,
+        "inferenceMs": 1721.17
+      }
+    },
+    {
+      "seconds": 5,
+      "rfdetr": {
+        "people": 12,
+        "ball": {
+          "box": [
+            0.09623970603570342,
+            0.5853613219223917,
+            0.1046632626093924,
+            0.5991489090956748
+          ],
+          "confidence": 0.5924
+        },
+        "inferenceMs": 216.1
+      },
+      "yolov9": {
+        "candidates": [
+          {
+            "box": [
+              110.12,
+              411.76,
+              134.58,
+              426.6
+            ],
+            "confidence": 0.23287
+          }
+        ],
+        "maxRawBallConfidence": 0.2328738272190094,
+        "inferenceMs": 935.99
+      },
+      "yolo26": {
+        "candidates": [
+          {
+            "box": [
+              119.17,
+              418.58,
+              134.05,
+              432.64
+            ],
+            "confidence": 0.76102
+          }
+        ],
+        "maxRawBallConfidence": 0.7610209584236145,
+        "inferenceMs": 2391.53
+      }
+    },
+    {
+      "seconds": 6,
+      "rfdetr": {
+        "people": 13,
+        "ball": null,
+        "inferenceMs": 311.25
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.14937373995780945,
+        "inferenceMs": 1163.83
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.03915664553642273,
+        "inferenceMs": 2075.2
+      }
+    },
+    {
+      "seconds": 7,
+      "rfdetr": {
+        "people": 13,
+        "ball": null,
+        "inferenceMs": 261.34
+      },
+      "yolov9": {
+        "candidates": [
+          {
+            "box": [
+              804.19,
+              387.34,
+              826.88,
+              399.94
+            ],
+            "confidence": 0.28062
+          }
+        ],
+        "maxRawBallConfidence": 0.2806244492530823,
+        "inferenceMs": 969.97
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.060343801975250244,
+        "inferenceMs": 1965.32
+      }
+    },
+    {
+      "seconds": 8,
+      "rfdetr": {
+        "people": 10,
+        "ball": null,
+        "inferenceMs": 276.63
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.011574268341064453,
+        "inferenceMs": 1001.89
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.0015273988246917725,
+        "inferenceMs": 2948.45
+      }
+    },
+    {
+      "seconds": 9,
+      "rfdetr": {
+        "people": 10,
+        "ball": null,
+        "inferenceMs": 490.7
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.011812150478363037,
+        "inferenceMs": 1198.65
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.0053144097328186035,
+        "inferenceMs": 2087.75
+      }
+    },
+    {
+      "seconds": 10,
+      "rfdetr": {
+        "people": 9,
+        "ball": null,
+        "inferenceMs": 308.81
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.07897543907165527,
+        "inferenceMs": 1075.79
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.0032806694507598877,
+        "inferenceMs": 2015.65
+      }
+    },
+    {
+      "seconds": 11,
+      "rfdetr": {
+        "people": 5,
+        "ball": null,
+        "inferenceMs": 271.23
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.0012493133544921875,
+        "inferenceMs": 1095.85
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.0018509924411773682,
+        "inferenceMs": 2548.66
+      }
+    },
+    {
+      "seconds": 12,
+      "rfdetr": {
+        "people": 0,
+        "ball": null,
+        "inferenceMs": 292.3
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 8.225440979003906e-06,
+        "inferenceMs": 987.68
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.0001246631145477295,
+        "inferenceMs": 1962.67
+      }
+    },
+    {
+      "seconds": 13,
+      "rfdetr": {
+        "people": 0,
+        "ball": null,
+        "inferenceMs": 274.91
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 8.493661880493164e-06,
+        "inferenceMs": 1012.81
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 8.58306884765625e-06,
+        "inferenceMs": 2869.64
+      }
+    },
+    {
+      "seconds": 14,
+      "rfdetr": {
+        "people": 0,
+        "ball": null,
+        "inferenceMs": 329.12
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 0.00010675191879272461,
+        "inferenceMs": 1129.96
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 4.3392181396484375e-05,
+        "inferenceMs": 1803.18
+      }
+    },
+    {
+      "seconds": 15,
+      "rfdetr": {
+        "people": 0,
+        "ball": null,
+        "inferenceMs": 239.5
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 8.314847946166992e-06,
+        "inferenceMs": 935.46
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 2.4139881134033203e-06,
+        "inferenceMs": 2086.32
+      }
+    },
+    {
+      "seconds": 16,
+      "rfdetr": {
+        "people": 0,
+        "ball": null,
+        "inferenceMs": 306.89
+      },
+      "yolov9": {
+        "candidates": [],
+        "maxRawBallConfidence": 8.434057235717773e-06,
+        "inferenceMs": 1137.52
+      },
+      "yolo26": {
+        "candidates": [],
+        "maxRawBallConfidence": 8.463859558105469e-06,
+        "inferenceMs": 2194.73
+      }
+    }
+  ],
+  "sourceId": "inter-ajax-u19-2012",
+  "sourceManifest": "apps/touchline/public/demo/source.json"
+}

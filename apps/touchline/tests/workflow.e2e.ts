@@ -6,7 +6,7 @@ test("guest can call, correct, persist and export a match", async ({
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/");
+  await page.goto("/desk");
   await expect(
     page.getByRole("heading", { name: "Every match has a story." }),
   ).toBeVisible();
@@ -48,7 +48,7 @@ test("guest can call, correct, persist and export a match", async ({
 test("new match setup, roster and import are real editable workflows", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/desk");
   await page.getByRole("button", { name: "New match", exact: true }).click();
   await page.getByRole("button", { name: "Set up a new match" }).click();
   await page.getByLabel("Match name", { exact: true }).fill("Cup final");
@@ -106,7 +106,7 @@ test("cloud save, concurrent edits, read-only overlay and revocation enforce the
 }) => {
   const anonymous = await request.get("/api/matches");
   expect(anonymous.status()).toBe(401);
-  await page.goto("/signin-with-chatgpt?return_to=/");
+  await page.goto("/signin-with-chatgpt?return_to=/desk");
   await expect(
     page.getByRole("button", { name: "Save match to cloud" }),
   ).toBeVisible();
@@ -191,7 +191,7 @@ test("mobile desk has working navigation without horizontal overflow", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/");
+  await page.goto("/desk");
   await expect(page.locator(".mobile-tabs")).toBeVisible();
   await page
     .locator(".mobile-tabs")
@@ -213,7 +213,7 @@ test("an authenticated user cannot read, edit or delete another owner’s stored
   request,
 }) => {
   const { execFileSync } = await import("node:child_process");
-  await page.goto("/signin-with-chatgpt?return_to=/");
+  await page.goto("/signin-with-chatgpt?return_to=/desk");
   const created = await page.request.post("/api/matches", { data: newMatch() });
   expect(created.status()).toBe(201);
   const data = await created.json();
@@ -290,7 +290,7 @@ test("voice controls dispatch narration and local video timestamps survive panel
       },
     });
   });
-  await page.goto("/");
+  await page.goto("/desk");
   await page.getByRole("button", { name: "Voice off", exact: true }).click();
   await expect
     .poll(() =>
