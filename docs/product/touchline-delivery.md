@@ -32,6 +32,9 @@ These checks do not independently prove audible voice quality, external OBS capt
 - Publication status: **succeeded**, confirmed by the native deployment-status result.
 - Private production URL: https://touchline-matchday-desk.socialpony16.chatgpt.site
 
+- GitHub repository: https://github.com/Aminakzyzz/real-suits
+- Implementation commit: `5c237f6a11feedaaca4256ec5e57f6f1927ff42b`, pushed to `main`; remote ref was read back and matched.
+
 The publication uses an isolated ignored checkout, keeping the user's GitHub worktree intact. No source credentials or runtime database files are included. The platform repository contains the exact source packaged for that version. The main GitHub repository additionally retains research, operating documentation and the production smoke script.
 
 ## Pilot boundaries and commercial next step
@@ -41,3 +44,9 @@ This is a working first product for supervised rehearsals and pilots. It is not 
 Hosted access starts private. External viewers and OBS must pass the hosting audience gate; a read key does not bypass it. Use a deliberate hosting-sharing decision before giving external viewers access. Local operation is available through the repository startup instructions.
 
 A practical first commercial experiment is a paid setup/rehearsal for one club, followed by one permitted match and a repeat-use decision. The research proposes testing €9/match or €19–29/club/month, but neither price nor demand is validated. There are no fake paid plans or checkout buttons. Review the [operator guide](touchline-operator-guide.md), test the actual production machine's voice and OBS setup, retain project backups and agree operator support before a live customer broadcast.
+
+## Delivery audit
+
+The latest authorized end-product requirement is met by the functioning application, successful private deployment, pushed source, operating instructions and observed verification above. The proposed Discord and autonomous professional-league commentary systems were alternatives, not implemented promises. The initial card plan and employer-pilot proposal are historical and have been explicitly superseded. Actual customer revenue, autonomous vision and a public customer launch are not claimed as achieved.
+
+Working-tree inspection after the source push found only the user's pre-existing untracked `universal_digital_card_studio_plan.md`; it was left unchanged and uncommitted. The source handoff archive is generated from tracked files and excludes credentials and runtime data.

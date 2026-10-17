@@ -28,7 +28,7 @@ The [pivot research](research/product-pivot-2026-10-17.md) compares five ideas a
 
 ## Current delivery state
 
-A new private Site was registered and its exact source pushed/packaged using Sites. The native deployment reached **succeeded** at https://touchline-matchday-desk.socialpony16.chatgpt.site. The application source will also be committed and pushed to the user's existing GitHub repository. See the delivery record for immutable Site/source/version/deployment identifiers and final URL.
+A new private Site was registered and its exact source pushed/packaged using Sites. The native deployment reached **succeeded** at https://touchline-matchday-desk.socialpony16.chatgpt.site. The application source was committed as `5c237f6a11feedaaca4256ec5e57f6f1927ff42b` and pushed to the user's existing GitHub `main`; the remote ref was read back and matched. See the delivery record for immutable Site/source/version/deployment identifiers and final URL.
 
 ## Scope and honest limits
 
@@ -36,12 +36,14 @@ This release is operator-assisted and uses deterministic commentary templates. I
 
 Revenue and repeated customer demand remain unvalidated. Proposed pilot prices are experiments, not forecasts. Do not report a successful subscription launch or paid customers without actual evidence.
 
-## Remaining delivery work
+## Delivery audit
 
-1. Deployment success and its literal URL are recorded in the delivery evidence. Do not deploy a duplicate.
-3. Verify tracked files exclude credentials, local database state, dependencies and publication scratch state; preserve the existing root ignore rules.
-4. Commit and push the new app/research/docs to the existing GitHub remote without force.
-5. Deliver the working demo, repository, operating guide and specific limitations to the user.
+- Private production deployment succeeded and its literal URL is recorded above.
+- Source, research and operator documentation are pushed to the existing GitHub repository.
+- Existing root ignore rules were preserved; dependencies, credentials, local databases and publication scratch files were excluded from commits.
+- A source archive is available under ignored `artifacts/touchline-source.zip`.
+- The current user request for a functioning first end product is fulfilled. No paid-customer, public-launch or autonomous-vision claim is made.
+- Final handoff must state the private-access and operator-assisted boundaries clearly.
 
 ## Commercial follow-up
 
