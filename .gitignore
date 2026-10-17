@@ -218,3 +218,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Touchline delivery artifacts and application source
+/artifacts/
+!apps/touchline/lib/
+!apps/touchline/lib/**
