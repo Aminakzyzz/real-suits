@@ -1,3 +1,4 @@
+import type { MatchRoster } from "./roster";
 export type VisionLanguage = "en" | "es" | "fr";
 
 export type VisionSource = {
@@ -16,6 +17,7 @@ export type VisionHealth = {
   model?: { ready: boolean; name: string };
   speech?: { ready: boolean; voices: VisionVoice[]; engine?: string };
   version?: string;
+  identity?: { available: boolean; experimental: boolean; requiresRoster: boolean };
 };
 export type VisionObservation = {
   sequence: number;
@@ -26,6 +28,8 @@ export type VisionObservation = {
     box: number[];
     confidence: number;
     team: "home" | "away" | null;
+    identity?: { playerId: string; name: string; number: number; team: "home" | "away";
+      evidence: { method: string; readings: number; firstPtsMs: number; lastPtsMs: number; teamScore: number; ocrScore: number } };
   }[];
   ball: { box: number[]; confidence: number } | null;
   scene: "wide" | "closeup" | "cut";
@@ -61,6 +65,7 @@ export type VisionSession = {
     sampleFps: number;
     pace: boolean;
     maxSeconds: number;
+    roster?: MatchRoster | null;
   };
   progress: { processedMs: number; durationMs: number; frames: number };
   observations: VisionObservation[];

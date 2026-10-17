@@ -1,0 +1,57 @@
+{
+  "checkedOn": "2026-10-17",
+  "sources": [
+    {
+      "repo": "OpenSportsLab/OSL-loc-snbas-2025-e2e",
+      "revision": "54e24a663a5a0ed057ef12cf16d9460d270ddc6e",
+      "url": "https://huggingface.co/OpenSportsLab/OSL-loc-snbas-2025-e2e",
+      "license": "agpl-3.0",
+      "gated": false,
+      "files": [
+        {
+          "path": ".gitattributes",
+          "size": 1519
+        },
+        {
+          "path": "README.md",
+          "size": 2540
+        },
+        {
+          "path": "config.yaml",
+          "size": 2733
+        },
+        {
+          "path": "model.pt",
+          "size": 152081691
+        }
+      ],
+      "status": "Checkpoint availability and config inspected; not installed, executed, or commercially cleared."
+    },
+    {
+      "repo": "OpenSportsLab/OSL-loc-snbas-2023-e2e",
+      "revision": "42dd642fd2342d18e9089595d704c93ed3943e82",
+      "url": "https://huggingface.co/OpenSportsLab/OSL-loc-snbas-2023-e2e",
+      "license": "agpl-3.0",
+      "gated": false,
+      "files": [
+        {
+          "path": ".gitattributes",
+          "size": 1519
+        },
+        {
+          "path": "README.md",
+          "size": 2435
+        },
+        {
+          "path": "config.yaml",
+          "size": 2605
+        },
+        {
+          "path": "model.pt",
+          "size": 151897307
+        }
+      ],
+      "status": "Checkpoint availability and config inspected; not installed, executed, or commercially cleared."
+    }
+  ]
+}

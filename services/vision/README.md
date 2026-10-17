@@ -2,8 +2,9 @@
 
 This optional CPU service decodes authorized footage in order, runs a pinned
 RF-DETR detector, maintains simple IoU track associations, generates conservative
-visual descriptions and produces local WAV narration. It does not identify
-players or confirm goals, passes, referee decisions or scores.
+visual descriptions and produces local WAV narration. Optional roster/jersey
+identity is experimental and has no validated football accuracy. The service
+does not confirm goals, passes, referee decisions or scores.
 
 The browser studio also has a standalone on-device mode; it does not need this
 service. The service adds durable sessions, uploads and downloadable voice audio.
@@ -74,3 +75,18 @@ the service running, use `.venv/bin/python scripts/verify_pipeline.py`. Add
 `--app-proxy --base-url http://127.0.0.1:5173` to include the authenticated local
 development app proxy. The script processes the licensed short clip at paced 1×;
 it is an integration test, not a football accuracy benchmark.
+
+## Experimental roster identity
+
+Current source accepts an optional `roster` in session settings and the studio's
+Local service controls. Install Tesseract with English language data to enable
+jersey OCR. Import a match-valid home/away roster JSON (team `name`, visible kit
+`color`, and `players` with unique `id`, `name`, `number`), or a producer backup;
+the frontend extracts only roster fields and strips events/scores/facts.
+
+Names require repeated readable jersey/team evidence and otherwise remain
+unknown. The module has component tests and a real-OCR synthetic positive
+control, not validated football identity accuracy. It does not establish
+possession or action outcomes. New UI integration and real-football evaluation
+remain pending; this iteration is not in the last private deployment. See the
+full handoff for exact behavior and continuation tasks.

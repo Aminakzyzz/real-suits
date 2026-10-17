@@ -39,6 +39,7 @@ import {
   type VisionSource,
   type VisionUtterance,
 } from "@/lib/vision";
+import { rosterSchema, type MatchRoster } from "@/lib/roster";
 
 type League = {
   updatedAt?: string;
@@ -116,6 +117,7 @@ export default function VisionStudio() {
   const [session, setSession] = useState<VisionSession | null>(null);
   const [language, setLanguage] = useState<VisionLanguage>("en");
   const [voice, setVoice] = useState("");
+  const [roster, setRoster] = useState<MatchRoster | null>(null);
   const [maxSeconds, setMaxSeconds] = useState(60);
   const [boxes, setBoxes] = useState(true);
   const [speak, setSpeak] = useState(true);
@@ -137,6 +139,7 @@ export default function VisionStudio() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const uploadRef = useRef<HTMLInputElement>(null);
+  const rosterRef = useRef<HTMLInputElement>(null);
   const abortRef = useRef<AbortController | null>(null);
   const spokenRef = useRef(new Set<string>());
   const isSpeakingRef = useRef(false);
@@ -146,6 +149,8 @@ export default function VisionStudio() {
   const startedVideoRef = useRef(false);
   const sessionRef = useRef<VisionSession | null>(null);
   sessionRef.current = session;
+
+  useEffect(() => { setRoster(null); }, [sourceId, mode]);
 
   const releaseStream = useCallback(() => {
     streamRef.current?.getTracks().forEach((track) => track.stop());
@@ -456,8 +461,10 @@ export default function VisionStudio() {
       sampleFps: 1,
       pace: true,
       maxSeconds,
+      ...(mode === "service" && roster ? { roster } : {}),
     };
     try {
+      if (settings.roster) rosterSchema.parse(settings.roster);
       if (mode === "browser") {
         if (!videoRef.current || !playable)
           throw new Error("Choose a match video first.");
@@ -536,6 +543,16 @@ export default function VisionStudio() {
       );
     setBusy(false);
     if (screenStream) releaseStream();
+  }
+
+  async function loadRoster(file: File) {
+    if (file.size > 750000) { setError("Choose a roster or producer-desk backup smaller than 750 KB."); return; }
+    try {
+      const parsed = rosterSchema.safeParse(JSON.parse(await file.text()));
+      if (!parsed.success) { setError(parsed.error.issues[0]?.message || "Choose a valid match roster."); return; }
+      setRoster(parsed.data);
+      setError(null);
+    } catch { setError("Choose a valid roster JSON file or producer-desk backup."); }
   }
 
   async function shareMatchWindow() {
@@ -861,8 +878,9 @@ export default function VisionStudio() {
                           stroke="#200c35"
                           strokeWidth="5"
                         >
-                          {player.trackId} ·{" "}
-                          {Math.round(player.confidence * 100)}%
+                          {player.identity
+                            ? `${player.identity.name} · #${player.identity.number}`
+                            : `${player.trackId} · ${Math.round(player.confidence * 100)}%`}
                         </text>
                       </g>
                     ))}
@@ -1284,6 +1302,24 @@ export default function VisionStudio() {
                   : "Open source speech voices. No impersonation or voice cloning."}
               </p>
 
+              <div className="vision-range-label">
+                {mode === "service" && (
+                  <div className="vision-roster-panel">
+                    <label className="vision-field-label">MATCH ROSTER · EXPERIMENTAL</label>
+                    <input ref={rosterRef} type="file" accept="application/json,.json" hidden aria-label="Match roster file" onChange={event => { const file = event.target.files?.[0]; if (file) void loadRoster(file); event.target.value = ""; }} />
+                    <button className="vision-btn vision-btn-purple" disabled={live || busy || !serviceHealth?.identity?.available} onClick={() => rosterRef.current?.click()}><Upload size={14} /> {roster ? "Replace roster" : "Load match roster"}</button>
+                    <p className="vision-field-hint">Load this match’s lineup or a producer-desk backup. Names require repeated jersey readings and kit evidence.</p>
+                    {roster && <>
+                      {(["home", "away"] as const).map(side => <label className="vision-roster-team" key={side}>
+                        <input type="color" aria-label={`${side === "home" ? "Home" : "Away"} visible kit colour`} value={roster[side].color} disabled={live || busy} onChange={event => { const color = event.target.value; setRoster(current => current ? { ...current, [side]: { ...current[side], color } } : null); }} />
+                        <span>{roster[side].name}<small>{roster[side].players.length} roster entries</small></span>
+                      </label>)}
+                      <button className="vision-tool-active" disabled={live || busy} onClick={() => setRoster(null)}>Clear roster</button>
+                    </>}
+                    {serviceHealth && !serviceHealth.identity?.available && <p className="vision-field-hint">Jersey recognition is unavailable on this engine. Tracking and commentary still work.</p>}
+                  </div>
+                )}
+              </div>
               <div className="vision-range-label">
                 <label className="vision-field-label" htmlFor="vision-duration">
                   ANALYZE UP TO

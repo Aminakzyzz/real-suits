@@ -13,6 +13,7 @@ class Narrator:
         self.last_spoken_ms = -10000
         self.previous_ball: tuple[float, float] | None = None
         self.last_type: str | None = None
+        self.introduced_players: set[str] = set()
 
     def consider(self, observation: dict) -> dict | None:
         now = observation["sourcePtsMs"]
@@ -24,6 +25,15 @@ class Narrator:
         self.previous_ball = position
         if now-self.last_spoken_ms < 8000:
             return None
+        identified = next((p["identity"] for p in observation["players"] if p.get("identity") and p["identity"]["playerId"] not in self.introduced_players), None)
+        if identified:
+            number, name = identified["number"], identified["name"]
+            text = {"en": f"Number {number}, {name}, is in view.", "es": f"El número {number}, {name}, está a la vista.", "fr": f"Le numéro {number}, {name}, est à l'image."}[self.language]
+            self.introduced_players.add(identified["playerId"])
+            self.last_type, self.last_spoken_ms = "player_identified", now
+            return {"id": uuid.uuid4().hex, "sourcePtsMs": now, "observedThroughPtsMs": observation["observedThroughPtsMs"], "type": "player_identified",
+                "actorId": identified["playerId"], "team": identified["team"], "text": text,
+                "confidence": min(identified["evidence"]["teamScore"], identified["evidence"]["ocrScore"]), "identityEvidence": identified["evidence"]}
         count = len(observation["players"])
         direction = None
         if position and previous and observation["scene"] != "cut":

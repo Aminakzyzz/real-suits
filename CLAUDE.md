@@ -9,9 +9,12 @@ The app is `apps/touchline`; the optional local inference/audio service is
 original `universal_digital_card_studio_plan.md` is untracked context and must not
 be committed or rewritten without instruction.
 
-The current build runs real generic person/ball detection and conservative visual
-observation narration. It does not yet perform reliable named-player play-by-play
-or automatic rule-event/score recognition. Do not claim those features are done.
+The published baseline runs real generic person/ball detection and conservative
+visual observation narration. The newer repository iteration adds experimental
+roster/kit/jersey identity evidence, not yet integrated-browser/real-football
+validated or published. Latest checks: 26 Python tests plus 23 subtests, 18
+TypeScript/domain tests and type checking passed. Do not claim reliable
+named-player play-by-play or automatic rule-event/score recognition is done.
 Subsequent production verification and private deployment succeeded. Read
 `docs/product/vision-verification-2026-10-17.md` for the latest evidence and
 remaining quality gaps. The current narration remains too generic for the full

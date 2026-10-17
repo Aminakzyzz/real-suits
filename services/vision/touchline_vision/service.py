@@ -26,6 +26,7 @@ from .narration import Narrator
 from .perception import Detector, MODEL_REVISION, Perception
 from .speech import SpeechEngine, SpeechError
 from .neural_speech import NeuralSpeechEngine
+from .identity import IdentityResolver, MatchRoster
 
 ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_DATA = Path(__file__).resolve().parents[1] / ".runtime"
@@ -52,6 +53,7 @@ class Settings(BaseModel):
     sampleFps: float = Field(default=1, ge=.25, le=5)
     pace: bool = True
     maxSeconds: int = Field(default=60, ge=1, le=7200)
+    roster: MatchRoster | None = None
 
 
 class SessionManager:
@@ -174,6 +176,8 @@ class SessionManager:
             if self.detector is None:
                 self.detector = Detector(self.model_path)
             perception, narrator = Perception(self.detector), Narrator(snapshot["settings"]["language"])
+            roster = snapshot["settings"].get("roster")
+            identities = IdentityResolver(MatchRoster.model_validate(roster)) if roster else None
             fps = cap.get(cv2.CAP_PROP_FPS)
             if not 0 < fps <= 240:
                 raise ValueError("The video has an unsupported frame rate.")
@@ -203,6 +207,10 @@ class SessionManager:
                             break
                     sequence = snapshot["progress"]["frames"]+1
                     observation = perception.observe(image, sequence, pts)
+                    if identities:
+                        identity_started = time.perf_counter()
+                        observation = identities.observe(image, observation)
+                        observation["identityMs"] = round((time.perf_counter()-identity_started)*1000, 2)
                     observation["modelRevision"] = MODEL_REVISION
                     log.write(json.dumps(observation)+"\n")
                     log.flush()
@@ -317,7 +325,9 @@ def create_app(directory: Path | None = None, model_path: Path | None = None) ->
         return {"status": "ok", "version": __version__, "model": {"ready": manager.model_path.is_file(), "name": "RF-DETR Nano · COCO · int8", "revision": MODEL_REVISION},
             "speech": {"ready": bool(shutil.which("espeak-ng")) or any(v["provider"] == "piper" for v in manager.speech.voices()), "voices": manager.speech.voices(), "engine": "eSpeak NG + optional Piper"},
             "capabilities": ["generic-person-detection", "sports-ball-detection", "causal-observation-narration", "wav-export"],
-            "limitations": ["No player identification, rule-event recognition or automatic scoring.", "Simple IoU association; camera motion and occlusion can change tracks."]}
+            "identity": {"available": bool(shutil.which("tesseract")), "experimental": True, "requiresRoster": True,
+                "method": "configured kit colour and at least three agreeing jersey OCR readings"},
+            "limitations": ["Roster identity is experimental and has no validated football accuracy; no rule-event recognition or automatic scoring.", "Simple IoU association; camera motion and occlusion can change tracks."]}
 
     @app.get("/sources")
     def sources(request: Request):

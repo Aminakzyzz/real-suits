@@ -1,178 +1,239 @@
-# Touchline: implementation report and Claude Code handoff
+# Touchline — full project report and Claude Code handoff
 
-Prepared: **17 October 2026, Europe/Berlin**. This is the latest checkpoint, written at the user's request to hand the project to Claude before the usage limit. It supersedes earlier handoffs where they describe implementation as entirely unstarted.
-
-**Subsequent progress:** final production Worker inference and real paced video-to-neural-audio/export verification passed, and the new studio was published privately. Read [the later verification/deployment record](../product/vision-verification-2026-10-17.md) before treating the pending-check/deployment sections below as current. The football action/identity and quality gaps remain open.
+**Checkpoint: 17 October 2026, Europe/Berlin.** This is the authoritative consolidated handoff. It replaces the earlier version of this file, including its obsolete statements that production verification and publication were pending. Keep the research documents as dated evidence; their older implementation-status statements do not override this report.
 
 ## 1. Executive assessment
 
-We have progressed from an operator-assisted commentary desk to a **working computer-vision prototype with a Premier League-inspired studio**. The new browser path runs an actual downloaded object detector, draws tracked boxes, generates conservative visual descriptions and can speak those descriptions. It accepts bundled footage, local uploads and a user-selected live window/screen input. An optional local Python service adds persistent sessions, CPU inference, offline voice generation and audio/caption exports.
+**Touchline has a working, privately deployed football vision studio and a verified local video-to-neural-speech pipeline. It is not yet a reliable autonomous football commentator ready to sell.**
 
-**This is not yet the reliable autonomous football commentator the user ultimately wants.** Detection and visual description work. Reliable player identity, ball possession, passes, shots, goals, referee decisions, match-state understanding and natural professional play-by-play remain unfinished. The present text comes from deterministic rules over visual observations, not a trained football action model or a language model with deep match understanding. No foundation model was trained.
+The application accepts a licensed sample or local video, runs an actual object detector, draws person tracks and ball detections, generates conservative visual descriptions, and dispatches speech/captions. It also implements live browser window capture. A separate Python service adds persistent sessions, CPU inference, offline speech and WAV/VTT exports. The existing operator-assisted production desk remains available.
 
-The user wants an eventual real-customer product and revenue potential. Neither production reliability nor willingness to pay has been established. Do not mark that objective complete because the UI is polished or a short demo runs.
+The important remaining problem is football understanding: reliably recognizing passes, shots and other actions; associating supported player identities; distinguishing replays and referee outcomes; and producing useful, timely play-by-play over a complete match. The verified 16.25-second integration produced **one generic observation**, despite ball candidates in four sampled frames. Working inference and audio transport do not establish compelling commentary.
 
-**The newest studio is not deployed at the existing public-looking URL.** That URL still serves the earlier private operator-assisted release. Current source changes are the local/Git checkpoint; deployment must follow final production verification.
+A newer **experimental roster/jersey identity component** is included in the repository checkpoint. Its tests pass, including real Tesseract on a synthetic positive control. It has no measured accuracy on labelled football footage, no possession inference, and has not been published in the private Site release described below. Treat it as the next iteration requiring integrated review.
 
-## 2. User requirements and authorization
+Commercially, the broad idea already exists. We found direct competitors, especially Liat.ai. We have a plausible club-focused positioning hypothesis, but no verified exclusive market gap, paid customer, revenue, or demonstrated willingness to pay.
 
-The user explicitly requested:
+## 2. User intent, scope and continuity
 
-- Video-first autonomous commentary, including games played live, rather than entering every event manually.
-- Pretrained or trained computer vision, football statistics/context, language selection and voices.
-- Free authorized voices for this build. Own-voice and licensed commentator voices are future extensions.
-- Premier League design inspiration and the supplied league logos, with a personalized product identity.
-- Latest official league information.
-- Parallel implementation/research and a full report for Claude Code to continue.
+The user initially explored digital cards/recruiting tools, then explicitly authorized independent product selection and development. The accepted direction is now **video-first football commentary**. The original `universal_digital_card_studio_plan.md` is inspiration/context, not an instruction to build that unrelated product. It remains untracked and must not be rewritten or accidentally committed.
 
-The user reported permission from a colleague because they are participating in a Premier League hackathon, and authorized using YouTube/openly available licensed games. Proceed on that basis for the hackathon rather than repeatedly asking the same question. Actual organizer feed/account credentials or archive media inputs were not supplied. Keep source, dataset, voice and later customer distribution scopes separate. No Premier League protected video was downloaded or integrated.
+The requested end product should:
 
-Claude Code's `claude` CLI was **not installed** in this environment. Parallel workers were Codex sub-agents, not Claude. They delivered UI, speech/browser inference and media/data research. Their usage limits were reached near the handoff; no ongoing review result should be assumed to exist. Root integration work, the source checkpoint and this report are the continuation authority.
+- Watch an authorized live game or causally paced recording without requiring every event to be entered by an operator.
+- Understand players/actions, use grounded facts, generate commentary, offer language/voice selection, and synchronize playback.
+- Eventually support the user's own voice and authorized expressive voices. Current implementation uses free authorized speech; no commentator/celebrity clone was created.
+- Use a personalized Premier League-inspired interface and the requested league logos, plus current official information.
+- Become usable by real customers and have a credible route to revenue. The user can reach clubs and associations.
+- Preserve a detailed handoff so Claude can continue across usage limits.
 
-## 3. Repository and application map
+The user reports permission through a Premier League hackathon colleague and authorizes suitable YouTube/open footage. Proceed within that reported hackathon scope; do not repeatedly ask for the same permission. Organizer delivery credentials/feed URLs and customer-release scope were not supplied. No protected Premier League archive match was downloaded or integrated. Bundled demonstration clips have their own reuse manifests.
+
+A persistent goal is **active** for the full autonomous, customer-usable product. It has not been marked complete. The report and Git repository are the durable continuation record. An active goal does not guarantee background execution or automatic resumption after account/model usage limits; the next agent should resume from this checkpoint when available.
+
+## 3. Repository, deployed release and latest iteration
 
 Repository: **https://github.com/Aminakzyzz/real-suits**, branch **main**.
 
-| Location | Responsibility |
+| Item | Exact state |
 |---|---|
-| `apps/touchline` | React/TypeScript/Vinext application, Cloudflare Worker and D1. |
-| `apps/touchline/app/page.tsx` | New vision studio at `/`. |
-| `apps/touchline/components/vision-studio.tsx` | Video input, live sharing, engine/language/voice settings, inference state, boxes, commentary, exports and league panels. |
-| `apps/touchline/app/desk/page.tsx` | Preserved manual producer desk at `/desk`. |
-| `apps/touchline/lib/match.ts` | Existing confirmed-event commands, score/stat derivation, deterministic EN/ES/FR commentary and exports. |
-| `apps/touchline/lib/vision.ts` | Shared frontend transport types and same-origin API helper. |
-| `apps/touchline/lib/browser-vision.ts` | Browser sampling, worker RPC, IoU associations, observation narration, seek/cancel handling. |
-| `apps/touchline/lib/browser-detector.worker.ts` | Actual RF-DETR ONNX inference in a dedicated worker. |
-| `apps/touchline/app/api/vision/[...path]/route.ts` | Authenticated, allowlisted proxy to the optional service; injects owner identity. |
-| `apps/touchline/lib/league.ts` | Current-season discovery and official data normalization. |
-| `apps/touchline/app/api/league/route.ts` | Official refresh, caching, source provenance and explicit stale fallback. |
-| `apps/touchline/lib/data/league-snapshot.json` | Dated official fixtures/table/news fallback. |
-| `apps/touchline/public/branding` | Official league SVG assets requested by user. |
-| `apps/touchline/public/demo` | Small licensed match clips, poster images and source/license manifests. |
-| `services/vision/touchline_vision/perception.py` | Native ONNX inference, simple causal IoU association, histogram-based cut reset. |
-| `services/vision/touchline_vision/narration.py` | Conservative EN/ES/FR observation descriptions with cooldown/novelty rules. |
-| `services/vision/touchline_vision/service.py` | FastAPI, SQLite session records, paced decoding, uploads, ownership, audio/caption delivery. |
-| `services/vision/touchline_vision/speech.py` | Atomic, offline eSpeak WAV generation. |
-| `services/vision/touchline_vision/neural_speech.py` | Optional pinned Piper LJ Speech English neural voice. |
-| `services/vision/touchline_vision/cli.py` | Explicit detector download and loopback server commands. |
-| `services/vision/tests` | Protocol, ownership, validation, tracking, speech and real-model integration checks. |
-| `CLAUDE.md` | Concise continuation entry point. |
+| Root project | `/home/aminakziz/projects/real-suits` |
+| Last verified/published baseline root commit | `fb4d3381695d58a66bf79693cacf26d339fe625b` |
+| New handoff iteration | Experimental identity/roster code, tests and this consolidated report; use the current Git HEAD rather than resetting to the baseline. |
+| Private studio | https://touchline-matchday-desk.socialpony16.chatgpt.site |
+| Site ID | `appgprj_6ad2c952011881918cf3fe71b87fdfab` |
+| Published platform source | `dacbc6c5e2332c5a297825ea86bc15fa8cf4c791` |
+| Published version | `appgprj_6ad2c952011881918cf3fe71b87fdfab~appgver_a021e83e2a4081918c046b28386ae6d9` |
+| Successful deployment | `appgdep_6ad365f643bc8191993ccf8da1cc82ea`, returned timestamp `2026-10-17T12:11:58.185903+00:00` |
+| Audience | Owner-private custom access; unchanged. This is not a publicly accessible customer launch. |
+| Publication checkout | `/tmp/touchline-sites-open`; separate platform Git repository containing the web app. |
 
-The original user file `universal_digital_card_studio_plan.md` remains untracked context. Do not change or commit it inadvertently. Keep existing ignore rules. Model weights, Python virtual environments, SQLite/media uploads, local voices and research scratch files are ignored.
+Native deployment status confirmed publication. Functional browser checks ran against the matching **local production Worker**; the authenticated hosted page itself was not separately browser tested. The Python service is local and was not deployed into the Worker. The newer roster/identity iteration has not been republished.
 
-Earlier source checkpoints: `5c237f6` delivered the manual product; `3d948a4` delivered the vision research. The build checkpoint containing this report follows those commits. Use the actual Git HEAD and normal pull/merge; do not reset to the older source.
+Earlier milestones: `5c237f6` operator-assisted desk; `3d948a4` vision research; `69695f4` studio/service implementation and initial report; `fb4d338` production verification, real neural-audio pipeline and private publication.
 
-## 4. What is implemented
+## 4. What exists today
 
-### Browser mode
-
-The default mode is **This browser**. It does not require a GPU service, paid model API or private inference credentials. A dedicated worker uses ONNX Runtime Web 1.30.0 and the pinned approximately 28 MB RF-DETR Nano int8 model:
-
-```text
-Publisher: onnx-community/rfdetr_nano-ONNX
-Revision: eae21cee0687a91bcf9fa071605c48d7705d2d91
-File: onnx/model_quantized.onnx
-License metadata: Apache-2.0
-```
-
-Frames are sampled from the video playhead, resized to 384×384, converted to RGB CHW floats in 0–1 and passed to real inference. Outputs are 300 normalized boxes and 91-class logits; COCO person and sports-ball classes are selected. Boxes are drawn in the video's displayed coordinates. Simple IoU associations provide temporary IDs; they are not footballer identities.
-
-The browser generates cautious descriptions such as a visible ball's screen location or the number of people visible. EN/ES/FR wording exists. It does not invent player names, scores or rule events. Device speech uses available installed browser/system voices, so exact voice availability and audible quality vary.
-
-Local video uploads remain in the browser in this mode. A **Share a match window** control uses `getDisplayMedia({video:true,audio:false})` and a MediaStream; this adds a real live input path. The source's original commentary is excluded from inference. Native browser permission is still required for screen/window sharing. The final actual OS screen-picker path was not fully verified before the handoff; see verification boundaries below.
-
-Controls include start/stop, language/voice selection, detection overlay, narration mute, timeline navigation and VTT download. Audio is scheduled against the video playhead, old speech is cancelled on seek/pause and stale lines are dropped instead of reading an expanding backlog. This implementation needs longer playback tests before claiming tight synchronization under all conditions.
-
-### Local service mode
-
-The optional service runs on loopback port **8788**, independently from the web Worker. It uses Python 3.11, OpenCV, ONNX Runtime CPU, FastAPI, SQLite and a single inference executor. It imports bundled source manifests, accepts bounded video uploads, decodes in order, samples frames and stores session/observation state.
-
-Implemented API endpoints:
-
-```text
-GET    /health
-GET    /sources
-POST   /sources                         multipart field: file
-POST   /sessions
-GET    /sessions/{id}
-DELETE /sessions/{id}
-GET    /sessions/{id}/media
-GET    /sessions/{id}/audio/{utteranceId}
-GET    /sessions/{id}/captions.vtt
-GET    /sessions/{id}/commentary.wav
-```
-
-The application exposes these under `/api/vision/`. Its proxy requires sign-in, validates endpoint paths, forwards only selected headers, supplies an owner ID and supports a server-configured service token. Upload/session data are owner checked. An unconfigured remote service is not silently substituted for localhost on the deployed Worker. Service CORS/direct-origin restrictions encourage use through the app proxy.
-
-Session configuration includes `sourceId`, `language`, optional `voice`, `sampleFps`, `pace` and `maxSeconds`. Observations include source PTS, latest evidence PTS, boxes, confidence, scene and inference time. Events/utterances refer to the same media timeline. The current service narrator describes observations; it does not add its uncertain candidates to the manual desk's confirmed scoreboard.
-
-The app delays service playback until some analysis is available. Completed/cancelled sessions can export a generated mono WAV track and WebVTT. Speech failure preserves text and records a warning. Process restarts mark previously running jobs failed, rather than leaving them permanently labelled running. Recent frontend observations are bounded; the local JSONL log preserves the full sampled sequence.
-
-The final source-manifest reconciliation fix imports every bundled manifest on restart, so replacing the default clip cannot leave the old Ajax–Utrecht ID pointing at new Inter–Ajax bytes. Restart the service after pulling this checkpoint; do not rely on the pre-fix running process.
-
-### Interface and league information
-
-The studio is redesigned around Premier League purple, green, white/pale surfaces, a lion emblem, editorial heading, broad navigation, video workspace, setup controls, commentary and league panels. It retains **Touchline** as the product identity and labels the hackathon context. It does not claim to be the official Premier League product. The manual producer desk remains available.
-
-The official homepage is used to discover the active season and matchweek, rather than permanently hard-coding Matchweek 7. The official site's public implementation endpoints provide fixtures and standings. The route normalizes teams, crests, score/status and kickoff timestamps, caches modestly and keeps source links. The UI refreshes while visible and identifies saved/stale snapshots with timestamps. Standings matchweek and fixture matchweek are separate.
-
-An integration bug was fixed: Cloudflare's Fetch rejects `redirect:'error'`. The proxy now uses `manual` and rejects unexpected redirects. League refresh initially failed at the root homepage path; `/en` plus the transparent app User-Agent returned a fresh response. These are **undocumented website endpoints**, not an established supported commercial data agreement. Retain validation and fallback behavior.
-
-## 5. Footage, models and voices
-
-The final bundled default is **Inter–Ajax U19, 26 March 2012**, filmed by zilupe. It is a complete 16.250-second contiguous clip, 1280×720, H.264, muted. The [original Flickr page](https://www.flickr.com/photos/zilupe/7018838149/) explicitly links CC BY 2.0 in its JSON-LD; the [Commons file](https://commons.wikimedia.org/wiki/File:Next_Generation._U19._Inter_vs_Ajax._Ajax_goal..webm) carries the source. Preserve `public/demo/source.json` and attribution. The original title mentions a goal; this label is metadata and must not become hidden input to goal recognition.
-
-Additional bundled clips: Ajax–Utrecht 2024, 30 seconds, CC BY 3.0; and Latvia–Gibraltar 2026, approximately 17 seconds, CC0. The former has difficult spectator/net/crowd occlusion; the latter mainly shows a goalkeeper and smoke. They are useful robustness cases, not representative full-match benchmarks.
-
-The following ball detectors were evaluated separately but **not integrated**: `acatorcini/yolov9-soccer-ball` and `Dura-S/reco-yolo26s-football`. They are AGPL-labelled research alternatives; ONNX Runtime's license does not change weight conditions. Do not switch the shipped model solely because a confidence number is larger.
-
-On 17 integer-second frames of the Inter–Ajax clip, RF-DETR and both alternatives each produced ball candidates in **4 frames** at their tested thresholds. This is **candidate coverage, not precision or recall**. There is no full manual ground truth. Mean native CPU inference during the comparison was approximately **283 ms RF-DETR, 1,015 ms YOLOv9, 2,124 ms YOLO26**. Some specialized-model boxes at seconds 1 and 5 were visually inspected. Results are saved in `docs/research/initial-detector-comparison-2026-10-17.json`. Camera quality changed the result much more than simply selecting a larger model.
-
-Free speech paths:
-
-| Engine | Status | Boundary |
+| Capability | Implemented behavior | Remaining boundary |
 |---|---|---|
-| Browser/system voices | Integrated in browser mode. | Device-dependent availability; no downloadable audio capture implemented. |
-| eSpeak NG | Real EN/ES/FR WAV generation verified. | Clearly synthetic; installed system executable; GPL conditions apply when redistributing it. |
-| Piper LJ Speech | Optional English neural voice implemented and installed locally. | Select `piper-en`; approximately 63.5 MB pinned model; English only; Piper runtime GPL, model metadata MIT, LJ Speech data identified as public domain by publishers. |
+| Video inputs | Licensed samples, browser-local uploads, implemented live screen/window capture. | Native OS picker, denial/end/repeated-capture lifecycle still need real-device checks. No authenticated archive/live league feed integration. |
+| Browser perception | Real RF-DETR Nano ONNX inference in a worker; person/sports-ball boxes and temporary IoU associations. | Generic COCO detector; crowds/referees can be counted. Tracks are not stable player identities. |
+| Narration | Deterministic EN/ES/FR descriptions of visible people/ball observations. | Generic and sparse; no trained action understanding or language-model match reasoning. |
+| Browser voices | Available device/system voices, speech dispatch tied to playback. | Device availability varies; no exportable browser voice audio, audible-quality certification or voice cloning. |
+| Local service | FastAPI, sequential decoding, CPU ONNX, SQLite sessions, uploads, owner checks and observation logs. | Single executor/prototype lifecycle; no production-scale concurrency, retention policy or full-match soak. |
+| Offline speech | Real EN/ES/FR eSpeak WAV; optional English Piper LJ Speech neural voice. | Expressive multilingual neural commentary and pronunciation review remain open. |
+| Exports | Service WAV/VTT, browser VTT; manual desk JSON/CSV/SRT/Markdown/PNG. | No complete rendered broadcast/video export pipeline. |
+| Player identity, latest iteration | Roster import, configured kit colours, repeated jersey OCR, evidence-bearing name display/introduction. | Experimental local-service path only; synthetic control passed, real-football precision/coverage unmeasured. |
+| Football events | Manual desk supports confirmed goals/cards/substitutions and other events with correction. | Automatic passes/shots/goals/possession/rulings are not implemented reliably. Manual events are not hidden CV ground truth. |
+| Design/data | Premier League-inspired palette/layout, requested logos, sourced official fixtures/table/news with stale fallback. | Website implementation feeds have no established supported commercial API agreement. |
+| Accounts/recovery | Sites identity, owner-scoped manual records and service proxy, local draft recovery, revocable read-only overlay links. | Customer operational controls, monitoring, backups, full service hosting and billing remain unfinished. |
 
-The Lessac voice was excluded after its individual dataset terms were found to restrict commercial speech-product development. No celebrity/commentator clone was made. No paid API key is needed for the implemented demo. See `docs/product/free-speech.md` for exact voice sources, hashes and commands.
+No foundation model was trained. No paid model API is required for the implemented demo.
 
-## 6. Verification: passed versus pending
+## 5. Architecture and ownership boundaries
 
-**Passed at this checkpoint:**
+```mermaid
+flowchart LR
+  A[Local video or live window] --> B[Browser video clock]
+  B --> C[Worker: RF-DETR ONNX]
+  C --> D[Temporary tracks and observations]
+  D --> E[Conservative EN/ES/FR descriptions]
+  E --> F[Device speech and captions]
+  G[Licensed file or uploaded source] --> H[Authenticated app proxy]
+  H --> I[Python decode and CPU inference]
+  I --> J[Optional roster and jersey evidence]
+  J --> K[Descriptions and persistent session]
+  K --> L[eSpeak or Piper]
+  L --> M[PTS-based playback and WAV/VTT]
+```
 
-- **20 Python tests**, including **23 subtests**, in the latest run. Includes actual multilingual eSpeak, optional real Piper synthesis, concurrent/atomic outputs, model integration, API contracts, media validation, track reset and ownership boundaries.
-- **TypeScript type checking and 16 domain tests passed in the final checkpoint check**: 13 existing match tests plus three league-discovery/normalization tests. The worker format literal needed an `as const` fix after its first final check; the corrected configuration passed.
-- **Six existing Chrome end-to-end workflows** passed after moving the manual desk tests to `/desk`: editing/export, persistence, cloud conflict handling, owner isolation, overlays/revocation, mobile navigation and speech/video dispatch.
-- Actual Chrome **browser inference through the real Vinext app** produced people detections, overlay rectangles, a vision-derived line and a downloadable VTT, with no page errors in the successful stable run. A representative run reported nine people and approximately 1,364 ms WASM inference; a previous run reported eleven. These are small smoke results, not a quality benchmark.
-- Desktop and 390-pixel mobile layouts were inspected; no horizontal overflow in the checked views. Screenshots are under ignored `artifacts/studio-*.png`.
-- A production Worker **build succeeded** during integration. Build success is distinct from production-browser inference success.
-- A fresh official league API response was observed after fixing the upstream homepage request.
+The complete target architecture still needs replay classification, football-specific action recognition, independent evidence/match-state management and a better speaking scheduler between perception and narration. Keep observations, proposed actions, accepted incidents and wording separate. A detected ball is not proof of a pass, a named possessor, a goal or a referee decision.
 
-**Pending / do not claim passed:**
+| Path | Responsibility |
+|---|---|
+| `apps/touchline/app/page.tsx` | Vision studio at `/`. |
+| `apps/touchline/components/vision-studio.tsx` | Source/engine/language/voice settings, capture, playback, overlays, commentary, exports, league panels and new roster controls. |
+| `apps/touchline/lib/browser-vision.ts` | Causal video sampling, worker RPC, IoU associations, description policy and cancellation. |
+| `apps/touchline/lib/browser-detector.worker.ts` | Actual pinned ONNX inference. |
+| `apps/touchline/lib/vision.ts` | Transport types/API helper; latest identity/settings additions. |
+| `apps/touchline/lib/roster.ts` | New validated extraction of roster fields; excludes saved events, scores and player facts. |
+| `apps/touchline/app/api/vision/[...path]/route.ts` | Signed-in, allowlisted same-origin service proxy; injects owner identity. |
+| `apps/touchline/app/desk/page.tsx`, `lib/match.ts` | Existing producer desk and confirmed-event model. |
+| `apps/touchline/lib/league.ts`, `app/api/league/route.ts` | Official context discovery, validation, normalization, cache and dated fallback. |
+| `services/vision/touchline_vision/perception.py` | Native detector, simple causal IoU tracking, histogram cut reset. |
+| `services/vision/touchline_vision/identity.py` | New experimental kit/jersey/roster evidence resolver. |
+| `services/vision/touchline_vision/narration.py` | Observation descriptions; latest evidence-gated player introduction. |
+| `services/vision/touchline_vision/service.py` | SQLite-backed session lifecycle, paced processing, ownership, media/audio/caption API. |
+| `services/vision/touchline_vision/speech.py`, `neural_speech.py` | eSpeak and optional pinned Piper audio adapters. |
+| `services/vision/scripts/verify_pipeline.py` | Repeatable real-model, paced neural-audio integration verifier. |
+| `apps/touchline/tests/production-smoke.mjs` | Actual production Worker studio/desk smoke, including real model loading. |
+| `CLAUDE.md` | Short continuation entry point. |
 
-1. **Freeze and rebuild the exact final source**, including static ESM worker import, `worker.format='es'`, and the last default-video/source-manifest changes. Test the actual production Worker in Chrome, not just the dev server or a standalone Vite harness.
-2. Repeat a complete **real-CV → Piper → API export → browser playback** run after the final freeze. A previous real API attempt created a session successfully, but a Vite configuration restart interrupted polling with an HTML response. It did not establish a saved complete integrated success record. API/export tests use a deterministic detector fixture; real perception and speech have also been verified separately.
-3. Exercise the **actual OS screen/window picker**, track-ended event, permission denial and repeated share/stop. The UI implementation exists; a permission-picker stub is not proof of native capture.
-4. Verify audible speech/pronunciation and seeking under sustained playback. Headless dispatch tests cannot establish human voice quality.
-5. Finish cancellation/restart/retention/concurrency review and long-match soak. Optional in-process Piper inference has no hard interrupt; request cancellation is not guaranteed to interrupt native inference instantly.
-6. Confirm identity, ball/action precision/recall and consequential-error behavior on held-out labelled football. None of those product-quality gates is passed by the short samples.
-7. Publish the new app only after the production check. No new Site version/deployment has been saved for this build.
+The service exposes `/health`, `/sources` GET/POST, `/sessions` POST, session GET/DELETE, and session media/audio/caption/WAV endpoints. The app prefixes these with `/api/vision/`. Session settings include source, language, voice, sample cadence, pacing, duration and optional roster.
 
-### Worker integration trap: preserve the working combination
+The Worker is not a Python/CUDA/FFmpeg host. A customer's browser cannot reach a local Python service through the deployed Worker's loopback address. Remote service mode needs separately hosted inference and server-side `TOUCHLINE_VISION_URL` plus matching `TOUCHLINE_SERVICE_TOKEN`. No paid infrastructure was provisioned.
 
-Vinext's development transforms exposed bugs that a standalone Vite test missed:
+## 6. Models, media, voices and latest identity work
 
-- `new Worker(new URL(..., import.meta.url))` became a `file:///...` URL through the app transform. The code now uses the Vite `?worker` constructor import.
-- Bundling ORT or certain variable dynamic imports caused Vite's `window`-based development/HMR code to enter a worker. The final source uses a **static external ESM import of the pinned ORT runtime**.
-- Production worker output must stay ESM: `worker: {format:'es' as const}` in `vite.config.ts`.
+### Shipped detector
 
-Do not replace these based only on a standalone harness passing. If changing them, repeat real-app dev and production browser checks. The model comes from pinned Hugging Face and the runtime/WASM from pinned jsDelivr; first use requires internet. Offline packaging and integrity enforcement beyond the existing pins are future hardening tasks.
+- Publisher/model: [onnx-community/rfdetr_nano-ONNX](https://huggingface.co/onnx-community/rfdetr_nano-ONNX).
+- Revision: `eae21cee0687a91bcf9fa071605c48d7705d2d91`.
+- File: `onnx/model_quantized.onnx`, approximately 28 MB; publisher metadata Apache-2.0.
+- Input: RGB CHW 384×384 floats in 0–1. Outputs: 300 normalized boxes, 91-class logits; person index 1 and sports-ball index 37.
+- Browser ONNX Runtime Web 1.30.0; native ONNX Runtime 1.31.0. Model/runtime pins are explicit. First browser use still requires internet; full offline packaging/integrity hardening is unfinished.
 
-## 7. How Claude can run the project
+Two football-specific detector alternatives were evaluated separately: `acatorcini/yolov9-soccer-ball` and `Dura-S/reco-yolo26s-football`. Neither was integrated. Their AGPL-labelled artifacts must be evaluated on their own terms.
 
-Requirements: Node 22.13+, npm, Python 3.11/3.12 for the optional service, FFmpeg/FFprobe and eSpeak NG. This machine has no established usable CUDA GPU. Existing system Python is 3.14, so use `uv` to select 3.11 rather than accidentally installing incompatible wheels.
+### Bundled footage
+
+The current default is **Inter–Ajax U19, 26 March 2012**, by zilupe: 16.250 seconds, 1280×720, muted H.264, 2,778,850 bytes. SHA-256: `9ef107eaf7b39c61f6511046a37f13de175b2f782c3ee4224c3118b018902b6c`.
+
+The [original Flickr source](https://www.flickr.com/photos/zilupe/7018838149/) links CC BY 2.0 in its JSON-LD; the [Commons description](https://commons.wikimedia.org/wiki/File:Next_Generation._U19._Inter_vs_Ajax._Ajax_goal..webm) provides provenance. Preserve `public/demo/source.json` and `inter-ajax-source.json`. The title's goal label is metadata, **not model evidence**.
+
+Alternatives include a 30-second Ajax–Utrecht 2024 excerpt under CC BY 3.0 and a roughly 17-second Latvia–Gibraltar 2026 clip under CC0. These are short, imperfect camera samples, not representative full-match benchmarks. No Premier League archive recording is bundled. Full provenance is in `docs/research/media-and-brand-sources-2026-10-17.md`.
+
+### Free speech
+
+Browser voices are immediate and device-dependent. eSpeak NG provides actual EN/ES/FR WAV generation; it sounds synthetic. Optional `piper-en` uses the English LJ Speech medium voice, approximately 63.5 MB, with pinned revision and SHA-256 verification. Publisher metadata identifies the model as MIT and LJ Speech data as public domain; the Piper runtime is GPL. See `docs/product/free-speech.md` for exact artifact terms and commands.
+
+Lessac was deliberately excluded after its individual dataset terms proved unsuitable for commercial speech-product development. Own-voice cloning, licensed commentator identity and expressive neural Spanish/French remain future work. Original delivery presets are feasible without copying a famous person's voice. Do not mistake a match-video permission for a voice license.
+
+### Experimental identity iteration
+
+The new resolver uses a supplied match roster and selected visible kit colours. It does not use face recognition or guess names from famous-player knowledge. It requires at least three agreeing `(team, jersey number)` readings, separated in time, spanning at least 1.2 seconds. It rejects weak/ambiguous evidence, conflicting fresh readings, expired evidence, duplicate simultaneous identities and camera/time discontinuities.
+
+OCR is optional local Tesseract. Small original crops remain unknown; enlarging a tiny crop does not establish legibility. At most two player crops are OCR-processed per sampled frame. A name is attached only with a current accepted reading, rather than carried through unreadable frames by a fragile temporary track. The narrator can introduce a supported visible player; it never turns this identity into possession or a goal claim.
+
+The frontend imports only lineup/kit fields from roster JSON or a producer-desk backup. Stored events, scores and facts are stripped to prevent future-outcome leakage. Roster state clears on source/engine changes. The UI labels the feature experimental and offers kit-colour adjustment.
+
+**Evidence boundary:** unit/component tests passed, including actual Tesseract on a synthetic readable jersey. That validates the plumbing, not real-football identity precision. The current strict kit/crop gates may have low coverage; thresholds are heuristics and OCR confidence is not calibrated identity probability. This iteration still needs real-clip evaluation, integrated UI review and production verification before publication.
+
+## 7. Research and competitive assessment
+
+The deeper review is in `docs/research/live-football-vision-2026-10-17.md`; repository/model metadata snapshots and exact revisions are retained alongside it. Its opening implementation-status paragraph is historical, preceding the build.
+
+The linked [YOLO/OpenCV tutorial](https://www.youtube.com/watch?v=neBZ6huolkg) and [associated code](https://github.com/abdullahtarek/football_analysis) informed component decomposition. The code was inspected; the video was not watched/transcribed. Its ball interpolation/backfill can use future observations, and foot-proximity assignment is only a possession heuristic. Neither is a ready live commentator or a basis for a causal accuracy claim.
+
+### Relevant state of the art
+
+| Work | Why it matters | Adoption status / limitation |
+|---|---|---|
+| [SoccerNet Game State Reconstruction](https://github.com/SoccerNet/sn-gamestate) | Strong modular reference for geometry, teams, roles and jersey identity. | Not integrated; GPL code plus separate weights/data terms; audit offline aggregation before online use. |
+| [SoccerMaster](https://github.com/haolinyang-hlyang/SoccerMaster) | Football-specific representation learning and multi-component pipeline. | Not integrated; not a lightweight single checkpoint; component/data rights and runtime need review. |
+| [FOOTPASS](https://github.com/JeremieOchin/FOOTPASS) | Player-centric action taxonomy and tactical/track-based methods. | Supplied tracking inputs are not raw-video inference. README/license declarations conflict; no commercial clearance inferred. |
+| [PAVE](https://arxiv.org/html/2607.07320v1) / [ME-DST](https://arxiv.org/html/2608.01696v1) | Recent action-attribution methods worth comparing. | Published macro/micro F1, splits and inputs differ; not directly comparable and not commentary accuracy. No ready winner deployment was established. |
+| [StreamSoccer](https://arxiv.org/html/2608.19723v1) | Event memory and speak/silence scheduling are directly useful architectural ideas. | Main evaluations use reference/label assistance; not proof of fully autonomous raw-video performance. No installed release. |
+| [MatchTime](https://aclanthology.org/2024.emnlp-main.99.pdf) / [TimeSoccer](https://github.com/vpx-ecnu/TimeSoccer) | Temporal alignment and history-aware commentary research. | Training/evaluation resources, not demonstrated causal live deployment here. |
+| [Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) / [Chatterbox](https://github.com/resemble-ai/chatterbox) | Possible own-voice and expressive multilingual extensions. | Researched, not installed/integrated/benchmarked. Exact model variants and terms matter. |
+
+**Newest actionable model lead:** the [OpenSportsLab 2025 E2E checkpoint](https://huggingface.co/OpenSportsLab/OSL-loc-snbas-2025-e2e) is accessible without a gate, revision `54e24a663a5a0ed057ef12cf16d9460d270ddc6e`, with a 152,081,691-byte `model.pt`. Its card lists twelve ball-action classes and publisher-reported tight/loose mAP 47.98/58.35. These results were not reproduced. The artifact is AGPL-labelled; its card requests contact for proprietary/commercial deployment. Its configuration uses temporal clips and a DALI backend, so causality, preprocessing and runtime portability need auditing before integration. Code, weight and SoccerNet training-data conditions remain separate. See `docs/research/action-checkpoint-availability-2026-10-17.json`.
+
+This is a concrete action-model starting point, not a proven drop-in solution. Do not install a large CUDA stack indiscriminately: this machine has about 15 GiB RAM, no established usable CUDA GPU, and was under memory pressure during development.
+
+### Competitors and actual gap assessment
+
+| Competitor | Publicly advertised offer | What our research does not establish |
+|---|---|---|
+| [Liat.ai](https://liat.ai/) | Direct single-feed CV football commentary, 20+ languages, 30+ event types, selectable voice/tone, tracking, highlights, statistics/context and sponsors. Free pilot contact. | Independent accuracy, latency, deployment terms and comparable small-club tariff. We cannot claim these features are missing. |
+| [CAMB.AI](https://www.camb.ai/blog-post/2026-trophee-des-champions-to-become-first-european-football-match-with-ai-dubbed-commentary) | Announced live AI dubbing/localization of existing football commentary; broader generative commentary marketing. | Dubbing an existing commentator is distinct from inferring every event from raw video. Comparable commercial offer not trialled. |
+| [Spiideo Play](https://www.spiideo.com/spiideo-play/) | Automated production, camera ecosystem, third-party ingestion, graphics, replays, commentary workflows and distribution. | Exact autonomous narration package, hardware constraints and total comparable price. |
+| [Pro Talk](https://protalk.studio/) | Advertises AI commentary, tracking, graphics and smartphone capture. | Inspected page was coming-soon/waitlist; operational availability unverified. |
+| [OBSFootball](https://obsfootball.com/pricing/) / [ScoreLayer](https://www.scorelayer.live/pricing) | Low-cost football controls/overlays and streaming workflows. | Adjacent substitutes, not proof of automatic CV play-by-play. Hands-on competitor trials not completed. |
+
+These are vendor claims and research snapshots, not independently verified product benchmarks. Public pages do not establish negative claims about missing competitor features.
+
+The opportunity to test is a **club-focused, bring-your-own-feed commentary workflow** with convenient setup, club-controlled vocabulary, transparent uncertainty/corrections, accessible pricing and a sensible local/hosted choice. That is a positioning hypothesis. It is not a demonstrated moat, and customization alone does not distinguish us from Liat's advertised offer.
+
+A credible revenue experiment is a permitted club rehearsal followed by a concrete paid-repeat decision. Compare our result with the club's volunteer, no commentary and a competitor's actual pilot offer. Measure useful commentary, manual interventions, total match cost and support effort. No customer interviews, paid commitments or revenue have been recorded.
+
+The earlier overlay-era €9/match or €19–29/month suggestions are unvalidated hypotheses and should not be reused as an autonomous-inference price. Calculate compute, media egress/storage, speech, support and payment costs first. Per-language audio adds costs even when perception is shared. No forecast is justified yet.
+
+## 8. Verification: exactly what passed
+
+### Published baseline, before the newest identity iteration
+
+- **20 Python tests and 23 subtests** passed; actual speech and optional installed-model integration were exercised.
+- **16 TypeScript/domain tests** and type checking passed.
+- **Six existing Chrome end-to-end workflows** passed, primarily for the manual desk: persistence/edit/export, conflicts, owner isolation, overlay revocation, mobile layout and speech/video dispatch.
+- The final web app built and ran as an actual local production Worker. Chrome loaded the real model, produced detection overlays (nine boxes in the saved smoke run), dispatched narration, downloaded nonempty WebVTT and reported no page errors. `/desk` still accepted a confirmed goal; unsigned protected APIs returned 401.
+- Native private publication succeeded for the exact platform source listed above.
+
+### Complete real-model local integration
+
+The complete licensed **16.25-second** sample ran at paced 1× through the authenticated local app proxy, real RF-DETR CPU and actual `piper-en` synthesis:
+
+| Measurement | Observed result |
+|---|---|
+| Sampled frames | 17 |
+| Frames with ball candidates | 4 |
+| Generated observations / neural speech segments | 1 / 1 |
+| Detector inference p50 / p95 | 241.7 / 328.9 ms on this machine in that run |
+| Audio format | 22,050 Hz, mono PCM WAV |
+| Export length | 16.249977 seconds, within one PCM sample of source duration |
+| Captions | Nonempty WebVTT |
+| Causality timestamps | Equal source/evidence PTS for every sampled observation |
+
+These are short-clip integration measurements. They do not measure named-player precision, football-action recall, useful commentary density, full-match capacity or audible professional quality. Speech dispatch instrumentation does not establish how browser voices sound.
+
+In the separate detector comparison, each of RF-DETR, YOLOv9 and YOLO26 produced candidates in four of seventeen sampled frames. Mean native inference was approximately 283, 1,015 and 2,124 ms respectively. There is no complete manual ball ground truth: **candidate coverage is not precision or recall**.
+
+### Newest identity checkpoint: rechecked for this handoff
+
+- **26 Python tests and 23 subtests passed**, no skips in the observed run: `26 passed, 23 subtests passed in 22.45s`.
+- **18 TypeScript/domain tests passed**, including two new roster-validation/leakage tests; type checking passed.
+- The six new identity tests cover repeated/independent evidence, conflicts and gaps, team/roster uniqueness, unreadable/ambiguous abstention, actual Tesseract synthetic control, cut/unreadable-frame reset and EN/ES/FR evidence-only introduction.
+- **Not rerun for this new iteration:** full app browser workflows, production Worker smoke, complete real-clip OCR integration and deployment. Do not extend the baseline browser/deployment results to this iteration automatically.
+
+Detailed baseline evidence: `docs/product/vision-verification-2026-10-17.md` and `vision-validation-evidence-2026-10-17.json`. Current new tests are source evidence, not an accuracy benchmark.
+
+## 9. Startup and reproduction
+
+### Environment
+
+Use Node **22.13+** and npm. The optional service requires Python **3.11/3.12**; system Python here is 3.14, so use the existing `.venv` or select 3.11 with `uv`. FFmpeg/FFprobe, eSpeak NG and optional Tesseract English are available on this machine. Do not assume a CUDA GPU. Do not recreate existing virtual environments or delete `.wrangler/state` to make a test pass.
+
+Models, voices, uploaded media, SQLite runtime data, screenshots and virtual environments are ignored; another machine must install/download these separately. No credentials belong in Git. Existing local servers may be running on 5173/8788; check before starting duplicates.
 
 ### Web application
 
@@ -182,14 +243,15 @@ npm ci
 npm run dev
 ```
 
-Open the printed local URL, normally `http://127.0.0.1:5173`. The new studio is `/`; the existing producer desk is `/desk`. Browser mode can run without the optional inference service. Initial analysis downloads the pinned model/runtime, then plays the permitted sample and emits observations.
+Open the printed URL, usually `http://127.0.0.1:5173`. `/` is the vision studio; `/desk` is the producer desk. Browser mode needs no Python service or paid key. If service-mode authentication is needed locally, visit `/signin-with-chatgpt?return_to=/`; portable local development uses the existing loopback simulated sign-in, hosted deployment uses Sites identity.
 
-Do not start duplicate Vinext servers; reuse the running one or stop the owned process. At handoff a dev server had been running on 5173, but process availability is not guaranteed across sessions. For the manual cloud database on a fresh checkout, follow the existing root README's first-time migration command. Never replay an already applied migration or discard `.wrangler/state` to get a test green.
+For a **fresh** local database only, follow root `README.md`: build and apply `drizzle/0000_classy_toro.sql` with the existing Wrangler configuration/persistence directory. Do not replay a migration already applied to this workspace.
 
-### Optional Python service
+### Optional local service
 
 ```sh
 cd /home/aminakziz/projects/real-suits/services/vision
+# Create only if an appropriate .venv does not already exist:
 uv venv --python 3.11
 uv pip install --python .venv/bin/python -e '.[test,neural]'
 .venv/bin/python -m touchline_vision.cli setup
@@ -197,75 +259,94 @@ uv pip install --python .venv/bin/python -e '.[test,neural]'
 .venv/bin/python -m touchline_vision.cli serve --port 8788
 ```
 
-For local-service mode, sign into the app through `/signin-with-chatgpt?return_to=/` if needed. This is the existing local mock sign-in in portable development, not a new authentication system. Select a source, English and the **LJ Speech neural** voice to use Piper. For ES/FR use the offered eSpeak voices. See `services/vision/README.md`.
+Select **Local service** in the studio; choose `piper-en`/LJ Speech neural for English or eSpeak for Spanish/French. Restart after source updates: the service imports bundled source manifests at startup, including reconciliation of the replaced default sample.
 
-If `.venv` already exists, do not recreate it blindly; install/update the needed extras into it. Models are local ignored assets and must be downloaded again on another machine. No trained weights are in Git.
+Latest identity JSON shape:
+
+```json
+{
+  "home": {"name": "Blue Club", "color": "#0000ff", "players": [{"id": "home-27", "name": "Demo Player", "number": 27}]},
+  "away": {"name": "Red Club", "color": "#ff0000", "players": [{"id": "away-9", "name": "Other Player", "number": 9}]}
+}
+```
+
+This is illustrative synthetic roster data, not the correct roster for bundled footage. Import an actual match-valid roster when evaluating identity, and select visible kit colours rather than assuming the club's brand colour.
 
 ### Checks
 
 ```sh
-# From apps/touchline:
+# apps/touchline
 npm run typecheck
-node --experimental-strip-types --test tests/domain.test.ts tests/league.test.ts
+node --experimental-strip-types --test tests/domain.test.ts tests/league.test.ts tests/roster.test.ts
 npm run test:e2e
+npm run build
+npm run start -- --port 5174
+# In another terminal, while production Worker is running:
+node tests/production-smoke.mjs
 
-# From services/vision:
+# services/vision
 PYTHONPATH=. .venv/bin/python -m pytest -q
+# With app and service running; actual model/voice files must be installed:
+.venv/bin/python scripts/verify_pipeline.py --app-proxy --base-url http://127.0.0.1:5173
 ```
 
-Browser regression tests expect the dev server on port 5173 and installed Chrome. The old `tests/production-smoke.mjs` predates the new homepage; update its navigation/assertions before using it as evidence for this release.
+Playwright expects dev server 5173 and Chrome. The production smoke defaults to 5174; override with `TOUCHLINE_TEST_URL`. The real pipeline verifier writes ignored `.runtime/verification` artifacts and excludes request credentials. `npm test` alone currently runs only the original domain suite; use the explicit three-file command above to include league/roster tests.
 
-## 8. Deployment state
+## 10. Integration traps and operational gaps
 
-Existing private Site: **https://touchline-matchday-desk.socialpony16.chatgpt.site**.
+1. **Preserve the working browser worker loading combination:** Vite `?worker` constructor import, static external ESM import of pinned ONNX Runtime, and `worker: { format: 'es' as const }` in `vite.config.ts`. Prior alternatives produced `file://` worker URLs or injected `window`-based dev/HMR code into workers. Verify the real Vinext app in dev and production if changing this.
+2. **Cloudflare redirects:** Fetch rejects `redirect:'error'` in this environment. The proxy uses `manual` and rejects unexpected redirects. Do not regress it.
+3. **Data freshness:** league context discovers season/matchweek from the official `/en` homepage, validates upstream JSON and uses a clearly dated fallback. Fixture and standings matchweeks may differ. Do not feed archive commentary future results from current league panels.
+4. **Weak perception:** small balls, occlusion, camera pans, crowds and replays remain difficult. Current tracking is simple greedy IoU, not ByteTrack or stable ReID. Cut reset is not replay detection.
+5. **Weak narration:** the eight-second cooldown suppresses transient observations. Replace it with event priority/lifecycle and bounded speaking decisions; merely making generic lines more frequent is insufficient.
+6. **Audio/lifecycle:** no sustained seek/reconnect/underflow/half-time/provider-failure validation. Native Piper inference has no hard interruption. Long-match queue/memory/retention behavior and service crash recovery need review.
+7. **Deployment:** preserve owner-private audience. For website publication use the installed Sites skill and native tools; open the source checkout, synchronize app source while preserving its `.git`/manifest, build/package and deploy the returned immutable source. Refresh credentials through the tool; never copy prior credentials into docs or shell arguments. Root GitHub source and platform source have different hashes.
+8. **No hidden oracle inputs:** never infer a goal from a filename, commentator audio, final score, prewritten manual event log or future frames and call it autonomous live CV. Temporal models may emit delayed events only if evidence-availability time and delay are explicit.
 
-```text
-Site ID: appgprj_6ad2c952011881918cf3fe71b87fdfab
-Audience: owner-private custom access (preserve it)
-Previous published platform source: 781eca3c00dfaae5e23a4fe24cddbeab0700b601
-Opened platform checkout during this build: /tmp/touchline-sites-open
-```
+## 11. Prioritized continuation plan for Claude
 
-The root GitHub repository is the editable project source, including the service. The platform publishing checkout contains only the web application. Synchronize the finalized app source into the proper opened platform checkout, retaining its `.git`, Site manifest, identity and audience. The earlier opening attempt created an unborn nested `.git` in the app; that failed attempt's metadata was moved into ignored `artifacts/failed-site-opening.git` to avoid confusing root Git operations.
+**P0 — finish the newest identity iteration as a reviewable change.** Inspect the diff and this report. Run the roster UI through the actual local service, verify payload stripping, correct source/engine resets, optional-Tesseract behavior, mobile layout and unknown-player fallback. Evaluate actual football crops with labelled identities, including deliberate ambiguity. Repeat production smoke if the frontend changes. Publish only after that review; the current private release remains the verified baseline.
 
-Use the installed **Sites skill** and native tools for publication. Re-read its workflow for the next session. Refresh the source write credential; never put credentials in shell arguments, source, docs or Git. The temporary write credential used during this session is not a reusable handoff artifact. The skill helper handles source synchronization, commit/push and packaging; use its returned immutable IDs for deployment. Do not manually fabricate a saved version or call an old successful deployment the new build.
+**P1 — implement action understanding, the main product bottleneck.** Audit the accessible OpenSportsLab checkpoint/config, temporal receptive field, preprocessing, runtime and artifact conditions. If appropriate, adapt it behind a new bounded `actions.py` interface rather than mixing action guesses into perception. If unsuitable, keep it a research baseline and implement/train a permitted alternative. Begin with a small useful taxonomy; measure actual inferred inputs, not supplied tactical/oracle tracks. A useful action can remain anonymous when actor identity is unsupported.
 
-The hosted Worker can serve the browser-only detector; it cannot run CUDA/Python inference, FFmpeg or a persistent local service. Localhost on the deployed Worker is not the customer's computer. To use a hosted service, deploy it separately and configure server-side `TOUCHLINE_VISION_URL`/`TOUCHLINE_SERVICE_TOKEN`. No paid service was provisioned.
+**P1 — build evidence/state and better commentary scheduling.** Store source event time, latest evidence time, decision time, confidence per event/team/actor/outcome and provenance. Handle candidate → confirmed → corrected incidents, replay deduplication and score changes separately. Ground wording in accepted facts, keep deterministic fallback and prioritize meaningful play over repeated counts. Translation should use the same structured facts, not invent statistics.
 
-## 9. Concrete work breakdown for Claude collaboration
+**P1 — create a real evaluation set.** Use permitted contiguous footage with routine play, camera cuts, close-ups, occlusions, replays, near misses and actual rule outcomes. Split by whole match and hold out camera/club conditions. Label ball visibility, actions, identities and ambiguity. Report precision and coverage separately; silence alone cannot pass usefulness review.
 
-Keep each worker's edits bounded; use separate branches/worktrees if Claude and another coding agent run simultaneously.
+**P2 — harden and pilot.** Complete screen-capture lifecycle tests, full-match soak, cancellation/backpressure, restart/recovery, deletion/retention, concurrency and owner isolation. Measure timing and actual cost. Then run a permitted club rehearsal, observe usability and request a concrete paid-repeat decision. Add billing/paid hosting only after a real offer and authorization; neither is needed to prove the current technical hypothesis.
 
-| Owner / task | Files or boundary | Required deliverable |
+### Parallel work breakdown
+
+Claude can divide work along these boundaries without multiple agents editing the same files:
+
+| Workstream | Owns | Deliverable |
 |---|---|---|
-| Integrator — **P0** | App build, service integration, deployment, docs | Freeze exact source; pass actual production Worker vision smoke; rerun real pipeline with audio/export; publish new private version with evidence. |
-| Claude CV/action worker — **P1** | New `services/vision/touchline_vision/actions.py` and its tests; avoid UI and existing perception edits until agreed | Causal football action proposals with evidence/time/confidence, evaluated on held-out annotated clips. Compare real inferred tracks against supplied/oracle inputs. Begin with a small justified action taxonomy; no fake goal labels from filenames. |
-| Claude identity worker — **P1** | New identity/jersey/roster module behind a typed interface | Team/jersey/roster evidence with explicit unknown identities, temporal confidence and reset after cuts/substitutions. No face recognition required initially. |
-| Data/evaluation researcher — **P1** | Research docs, manifests, labelled evaluation assets outside Git where required | Representative authorized footage, actual event/actor ground truth, component and end-to-end metrics; artifact-specific licenses. |
-| Reliability worker — **P1/P2** | Session lifecycle/export code and meaningful tests | Cancellation/backpressure, crash recovery, retention/deletion, export atomicity and multi-user isolation review; full-match resource measurements. |
-| Voice/narrative worker — **P2** | Speech adapters and structured commentary policy | Natural EN/ES/FR narration grounded in confirmed events, pronunciation dictionary, bounded speech queue and measured timing. Use authorized voices only. |
+| Integrator | Studio/proxy, verification, deployment, status docs | Review latest identity UI, exact-source production check, reproducible demo and immutable release record. |
+| CV/actions | New `actions.py`, its adapter/config/tests | Causal proposals with evidence timestamps and held-out action metrics; no UI edits. |
+| Identity/evaluation | `identity.py`, identity tests, labelled evaluation manifest | Real-football named-actor precision/coverage; unknown handling, kit/jersey/cut/substitution failure analysis. |
+| Narrative/audio/reliability | Explicitly agreed narration/speech or session-lifecycle files | Useful speaking policy, pronunciation/timing, bounded queues and complete-match resilience. |
 
-The next useful research is task-specific evaluation and implementable models, not another generic market scan. Relevant papers and licensing caveats already exist in the earlier research. FOOTPASS's README/LICENSE conflict remains unresolved; SoccerNet data restrictions and supplied tracking inputs remain relevant. StreamSoccer's event memory is an architectural reference, not an available checkpoint we installed.
+Use branches/worktrees when agents run simultaneously. Claude CLI was not installed here; prior parallel workers were Codex agents and reached usage limits. Do not assume a Claude process or an unfinished background review is running.
 
-### First Claude instruction to paste
+### Completion evidence, not promises
 
-> Read `CLAUDE.md` and `docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md`. Continue in the existing `real-suits` repository. First freeze and verify the final browser worker in an actual production Worker build, then repeat the real video-to-Piper-to-audio-export integration and finish publication. Preserve the reported Premier League hackathon authorization, branding and licensed media manifests. Do not claim current generic visual narration is named-player football play-by-play. After the P0 checks, implement and evaluate a causal football action layer and identity evidence in bounded modules, keeping uncertainty explicit. Update the status/report with exact measured results and remaining work.
+Proposed gates: a contiguous 10–15-minute permitted, paced autonomous demo with useful actions and no hidden event log; then full-match operation. Measure actor precision **and** coverage, per-class action precision/recall, false goals and replay duplication, source/evidence/decision/first-audio times, playback alignment, resource usage and cost. Suggested pilot aspirations include ≥98% precision among spoken names and ±0.5-second alignment to scheduled buffered playback; neither has been achieved or validated. Require explicit goal/no-goal opportunities and correction cases rather than a vacuous zero-error test. Finish with a real permitted club rehearsal and paid-repeat evidence.
 
-## 10. Product/research context and completion criteria
+## 12. Paste this into Claude Code
 
-The broad category is not new: [Liat.ai](https://liat.ai/) advertises single-feed computer vision and multilingual football commentary; CAMB and Spiideo cover adjacent localization/production/data needs. A club-specific deployment, ownership and pricing offer remains a commercial hypothesis. No clear exclusive market gap, paid customers or revenue has been demonstrated. The user's access to clubs is a practical route to validation after technical reliability improves.
+> Continue Touchline in `/home/aminakziz/projects/real-suits` on the current branch. Read `CLAUDE.md`, then `docs/handoffs/BUILD_REPORT_AND_CLAUDE_HANDOFF_2026-10-17.md`. The verified private deployment has real generic CV and description narration; a separate complete short-clip local neural-audio/export pipeline also passed. The newest roster/jersey identity iteration passes 26 Python tests plus 23 subtests and 18 TypeScript/domain tests, but needs integrated UI/real-football/production verification and is not deployed. Preserve the user's original untracked plan, media attribution, reported Premier League hackathon scope and owner-private audience. First finish reviewing this iteration, then implement and evaluate causal football action understanding, evidence-grounded commentary scheduling and full-match reliability. Inspect the pinned OpenSportsLab 12-class action checkpoint as a possible research adapter; do not assume its causality, runtime or commercial deployment conditions. Use free authorized speech. Do not present generic descriptions, synthetic OCR controls, a manual event log or a successful deployment as completed autonomous football commentary. Keep the full customer-product goal active until its actual acceptance evidence exists. Update the report with exact results and next steps.
 
-Completion should mean a permitted continuous match produces useful action commentary, justified player references, generated authorized speech and synchronized viewing without someone entering every moment, then survives a full-match trial and correction/recovery scenarios. Measure named-actor precision and coverage separately, event precision/recall, false goals, replay duplication, inference/utterance latency, resources and cost. A system that avoids all errors by staying silent also fails usefulness review.
+## 13. Supporting records
 
-Retain the original confirmed-event desk as a recovery/review tool, not as hidden labour behind an “autonomous” claim. The long-term product goal remains unfinished and should stay open for continuation.
+- `docs/product/vision-verification-2026-10-17.md` and `vision-validation-evidence-2026-10-17.json`: published baseline and actual integration evidence.
+- `docs/research/live-football-vision-2026-10-17.md`: detailed technical research, sources, dataset/model boundaries and proposed architecture.
+- `docs/research/action-checkpoint-availability-2026-10-17.json`: newest accessible action checkpoint revisions/file sizes.
+- `docs/research/source-snapshot-2026-10-17.json`: inspected repository/model provenance.
+- `docs/research/initial-detector-comparison-2026-10-17.json`: limited, non-ground-truth detector comparison.
+- `docs/research/media-and-brand-sources-2026-10-17.md`: actual footage, official design/data sources and attribution.
+- `docs/product/free-speech.md`, `services/vision/README.md`: voice/runtime setup and exact provenance.
+- `docs/product/touchline-operator-guide.md`: existing manual desk operation.
+- `docs/research/product-pivot-2026-10-17.md`: historical idea comparison and manual-first hypothesis, superseded where the user requested autonomy.
+- `docs/research/market-research-2026-10-17.md`, `competitor-validation-scorecard.md`, `docs/product/proposed-pilot-and-acceptance.md`: historical digital-card/recruiting research; not current football implementation instructions.
 
-Related records:
-
-- `docs/research/live-football-vision-2026-10-17.md` — deeper state-of-the-art and architecture research.
-- `docs/research/source-snapshot-2026-10-17.json` — 21 inspected repository/model metadata revisions.
-- `docs/research/media-and-brand-sources-2026-10-17.md` — actual footage/design/data sources and attribution.
-- `docs/research/initial-detector-comparison-2026-10-17.json` — current small, non-ground-truth detector comparison.
-- `docs/product/free-speech.md` — speech integration, exact voice/model provenance and limits.
-- `docs/PROJECT_STATUS.md` — concise continuation state.
-
-This report is deliberately explicit about pending checks. It is a reproducible engineering checkpoint, not a declaration that the final product is perfectly implemented.
+The immediate engineering handoff is complete. The autonomous, reliable, revenue-generating customer product remains the active objective.
